@@ -62,7 +62,7 @@ input.bordered_input {
     background: transparent;
     border-bottom-width: 0.5px;
     border-bottom-style: solid;
-    border-bottom-color: #58dad1; 
+    border-bottom-color: #58dad1;
     width: 20px;
 }
 
@@ -75,7 +75,7 @@ input.bordered_input {
             margin-right: 6px;
             margin-left: 10px;
             }
-			
+
 /* round button*/
 .button-float {
   background: #00b5ac !important;
@@ -114,7 +114,7 @@ hr.colored {
 
 /*font설정*/
 /*나눔고딕 폰트 적용*/
-@font-face { 
+@font-face {
   font-family: 'NanumGothic';
   src: url("../fonts/NanumGothic.ttf");
 }

@@ -5,7 +5,7 @@ angular.module('expirit.controllers')
 	$rootScope.birth=birth;
 	console.log($rootScope.birth);
   };
-  
+
   this.setSex = function(sex){
 	$rootScope.sex=sex;
 	console.log($rootScope.sex);
@@ -13,7 +13,7 @@ angular.module('expirit.controllers')
   this.getSex=function(){
 	  return $rootScope.sex;
   }
-  
+
   this.setWeight= function(weight){
 	$rootScope.weight=weight;
 	console.log($rootScope.weight);
@@ -30,11 +30,10 @@ angular.module('expirit.controllers')
 
 .controller('introController', function($scope,ionicDatePicker,QuestService,UserApi,User) {
 	console.log("wait 3s.");
-	/*
-	setTimeout(function() {
+
+	/*setTimeout(function() {
 		window.location.href="http://localhost:8100/#/intro2";
-	}, 3000);
-*/
+	}, 3000);*/
 
 	/*운동 요일 체크 단일선택 컨트롤러*/
 	$scope.introday_mon = function(){
@@ -290,7 +289,7 @@ angular.module('expirit.controllers')
 			location.href="#/quest1";
 		}else{
 			console.log("password is not equal");
-		}    
+		}
 	}
 
 
@@ -347,9 +346,6 @@ $scope.$on("$ionicSlides.slideChangeEnd", function(event, data){
 
 /*퀘스트 컨트롤러*/
 .controller('questController', function ($scope,QuestService,UserApi) {
-	
+
 
 })
-
-
-

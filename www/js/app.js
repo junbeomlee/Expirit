@@ -148,7 +148,7 @@ $ionicConfigProvider.tabs.position('bottom');
         templateUrl: 'templates/intro/intro1-2.html'
 
   })
-  
+
   .state('intro2', {
     url: '/intro2',
         templateUrl: 'templates/intro/intro2.html'
@@ -160,47 +160,7 @@ $ionicConfigProvider.tabs.position('bottom');
         templateUrl: 'templates/intro/intro3-1.html'
 
   })
-      .state('quest1', {
-    url: '/quest1',
-        templateUrl: 'templates/quest/quest1.html'
-
-  })
-        .state('quest2', {
-    url: '/quest2',
-        templateUrl: 'templates/quest/quest2.html'
-
-  })
-        .state('quest3', {
-    url: '/quest3',
-        templateUrl: 'templates/quest/quest3.html'
-
-  })
-          .state('quest4', {
-    url: '/quest4',
-        templateUrl: 'templates/quest/quest4.html'
-
-  })          
-  .state('quest5', {
-    url: '/quest5',
-        templateUrl: 'templates/quest/quest5.html'
-
-  })
-    .state('quest6', {
-    url: '/quest6',
-        templateUrl: 'templates/quest/quest6.html'
-
-  })
-      .state('quest7', {
-    url: '/quest7',
-        templateUrl: 'templates/quest/quest7.html'
-
-  })   
-  .state('quest8', {
-    url: '/quest8',
-        templateUrl: 'templates/quest/quest8.html'
-
-  })
-    .state('interview1', {
+  .state('interview1', {
     url: '/interview1',
         templateUrl: 'templates/interview/interview1.html'
 
@@ -239,9 +199,10 @@ $ionicConfigProvider.tabs.position('bottom');
         controller: 'etcController'
       }
     }
-  }).state('header',{
-    url: '/asd',
-    templateUrl:"templates/header.html",
+  }).state('quest',{
+    url: '/quest',
+    templateUrl:"templates/quest/quest.html",
+    controller: 'questController'
   }).state('addExercise',{
     url: '/addExercise/:day',
     templateUrl : "templates/addExercise.html",
@@ -253,7 +214,7 @@ $ionicConfigProvider.tabs.position('bottom');
       }
     }*/
   });
-  
+
 
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/tab/home');
@@ -281,4 +242,3 @@ $ionicConfigProvider.tabs.position('bottom');
     return elem;
   });
 });
-
