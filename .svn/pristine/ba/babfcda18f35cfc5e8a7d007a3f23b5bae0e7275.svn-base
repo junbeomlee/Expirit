@@ -1,0 +1,95 @@
+angular.module('expirit.controllers')
+
+.controller('introController', function($scope) {
+		console.log("wait 3s.");
+		setTimeout(function() {
+			window.location.href="http://localhost:8100/#/intro2";
+		}, 3000);
+})
+
+.controller('intro2Controller', function($scope) {
+$scope.options = {
+  loop: false,
+  effect: 'fade',
+  speed: 500,
+}
+
+$scope.$on("$ionicSlides.sliderInitialized", function(event, data){
+  // data.slider is the instance of Swiper
+  $scope.slider = data.slider;
+});
+
+$scope.$on("$ionicSlides.slideChangeStart", function(event, data){
+  console.log('Slide change is beginning');
+});
+
+$scope.$on("$ionicSlides.slideChangeEnd", function(event, data){
+  // note: the indexes are 0-based
+  $scope.activeIndex = data.activeIndex;
+  $scope.previousIndex = data.previousIndex;
+});
+
+
+
+})
+
+
+/*질의사항에서 데이트픽커를 관리하는 컨트롤러*/
+
+.controller('datepickerController', function ($scope, ionicDatePicker) {
+    var ipObj1 = {
+      callback: function (val) {  //Mandatory
+        console.log('Return value from the datepicker popup is : ' + val, new Date(val));
+      },
+      disabledDates: [            //Optional
+        new Date(2016, 2, 16),
+        new Date(2015, 3, 16),
+        new Date(2015, 4, 16),
+        new Date(2015, 5, 16),
+        new Date('Wednesday, August 12, 2015'),
+        new Date("08-16-2016"),
+        new Date(1439676000000)
+      ],
+      from: new Date(1920, 1, 1), //Optional
+      to: new Date(2016, 10, 30), //Optional
+      inputDate: new Date(),      //Optional
+      mondayFirst: true,          //Optional
+      //disableWeekdays: ,       //Optional
+      closeOnSelect: false,       //Optional
+      templateType: 'modal'       //Optional
+    };
+
+    $scope.openDatePicker = function(){
+      ionicDatePicker.openDatePicker(ipObj1);
+    };
+})
+
+/*질의사항에서 숫자 픽커를 관리하는 컨트롤러*/
+
+.controller('numberpickerController', function ($scope) {
+	$scope.number=75;
+	$scope.up = function(){
+      $scope.number++;
+    };
+	$scope.down = function(){
+      $scope.number--;
+    };
+  $scope.numberPickerObject = {
+      inputValue: 60, //Optional
+      minValue: 20,
+      maxValue: 180,
+      precision: 1,  //Optional
+      decimalStep: 1,  //Optional
+      format: "whole",  //Optional - "WHOLE" or "DECIMAL"
+      unit: "kg",
+      titleLabel: 'Number Picker',  //Optional
+      setLabel: 'Set',  //Optional
+      closeLabel: 'Close',  //Optional
+      setButtonType: 'button-positive',  //Optional
+      closeButtonType: 'button-stable',  //Optional
+      callback: function (val) {    //Mandatory
+      timePickerCallback(val);
+    }
+  };
+})
+

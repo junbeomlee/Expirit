@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        jar="C:\Users\front\Desktop\MY_EXPIRIT_CLIENT\platforms\android\build\intermediates\exploded-aar\android\CordovaLib\unspecified\debug\jars\classes.jar"
+        jumboMode="false"
+        revision="24.0.0"
+        sha1="06febdaff4941102640f7be4e680083dbe33de4e">
+        <dex dex="C:\Users\front\Desktop\MY_EXPIRIT_CLIENT\platforms\android\build\intermediates\pre-dexed\debug\CordovaLib-unspecified-debug_b3d521b55902a4160d0467b805f96972155dec21.jar" />
+    </item>
+
+</items>

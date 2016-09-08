@@ -1,0 +1,36 @@
+<ion-view>
+  <ion-nav-title>
+    {{appName}}
+  </ion-nav-title>
+  <ion-nav-buttons side="left">
+    <div ng-include="header">
+    </div>
+  </ion-nav-buttons>
+  <ion-content style="background-color:#EBEBED">
+    <div class="contents">
+      <section class="" style="background-color:#ffffff;padding:15px;margin-bottom:10px">
+        <h3>{{userName}}님 안녕하세요!</h3>
+        "더 좋은 나를 만들 수 있는데도 현재에 머물러있는것은
+        <br>
+        아무짝에도 쓸모없는 게으름 때문이다."
+      </section>
+
+      <!--스트레칭 섹션-->
+      <section class="stretch-section" style="margin-bottom:10px">
+
+      </section>
+
+
+
+      <!--코어운동섹션-->
+      <section class="core-section">
+    		<div class="list">
+          <ion-tree-list items="programs" collapsed="true"></ion-tree-list>
+        </div>
+      </section>
+
+
+    </div>
+
+  </ion-content>
+</ion-view>
