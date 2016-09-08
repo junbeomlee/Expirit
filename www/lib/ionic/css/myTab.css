@@ -14,7 +14,7 @@
   background-size:contain;
 }
 
-.tabs .tab-item .icon.myexercise-on {
+.tabs .tab-item .icon.history-on {
   background-repeat: no-repeat;
   background-position: 50%;
   height: 100%;
@@ -22,7 +22,7 @@
   background-size:contain;
 }
 
-.tabs .tab-item .icon.myexercise-off {
+.tabs .tab-item .icon.history-off {
   background-repeat: no-repeat;
   background-position: 50%;
   height: 100%;

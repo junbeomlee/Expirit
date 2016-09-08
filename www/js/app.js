@@ -91,12 +91,12 @@ $ionicConfigProvider.tabs.position('bottom');
       }
     }
   })
-  .state('tab.exercise', {
-    url: '/exercise',
+  .state('tab.history', {
+    url: '/history',
     views: {
-      'tab-exercise': {
-        templateUrl: 'templates/tab-exercise.html',
-        controller: 'exercieController'
+      'tab-history': {
+        templateUrl: 'templates/tab-history.html',
+        controller: 'historyController'
       }
     }
   })
