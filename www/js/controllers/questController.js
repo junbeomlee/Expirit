@@ -1,8 +1,29 @@
+
+var trueObjectToList = function(object){
+  var output=[];
+  for(var key in object){
+    if(object[key]==true)
+      output.push(key);
+  }
+  return output;
+}
+
+var trueObjectToValue = function(object){
+  for(var key in object){
+    if(object[key]==true){
+      return key;
+    }
+  }
+}
+
+
 angular.module('expirit.controllers')
-.controller('questController', function($scope,$rootScope) {
+.controller('questController', function($scope,$rootScope,QuestService) {
   $scope.title=""
   $scope.templateValue=1;
   $scope.templatePrefix='page';
+
+
   $scope.gender="none";
   $scope.checkboxGender = {
        male : true,
@@ -30,10 +51,16 @@ angular.module('expirit.controllers')
        SUN : false,
   };
   $scope.weight=75;
-  $scope.maleCheck=false;
-  $scope.femaleCheck=false;
+
   $scope.end = function(){
     alert("데이터를 보냅니다.");
+    var update={
+      age : "",
+      weight : $scope.weight,
+      purpose : trueObjectToValue($scope.checkboxPurpose),
+    }
+    console.log(trueObjectToList($scope.checkboxDay));
+    QuestService.apiUpdateUser();
     location.href="#/tab/home";
   }
 })
