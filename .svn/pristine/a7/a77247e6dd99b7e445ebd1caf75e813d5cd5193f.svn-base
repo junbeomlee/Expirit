@@ -1,0 +1,124 @@
+<ion-view view-title="Account" ng-controller="programController">
+  <ion-nav-title>
+    <div class="bar bar-header">
+      <button class=" name="button" ng-click="login()">login</button>
+      <!--<button class="button-icon" ng-click="showEditButton()">Edit</button>-->
+      <div class="h1 title">내 운동 프로그램</div>
+      <button class=" name="button" ng-click="apiGetProgram()">loadData</button>
+      <button class=" name="button" ng-click="logout()">logout</button>
+      <button class=" name="button" ng-click="test()">test</button>
+    </div>
+  </ion-nav-title>
+
+  <ion-floating-menu ng-hide="myValue" has-footer="true" button-color="#2AC9AA" icon="ion-plus" iconColor="#fff">
+    <ion-floating-item icon="ion-ios-plus-empty" click="addButtonClick()"></ion-floating-item>
+    <ion-floating-item icon="ion-ios-trash-outline" click="deleteButtonClick()"></ion-floating-item>
+    <ion-floating-item icon="ion-loop" click="changeButtonClick()"></ion-floating-item>
+  </ion-floating-menu>
+
+  <ion-content>
+
+  <!--선택자 원형그림-->
+  <table cellpadding="0" cellspacing="0" border="0" style="width:100%; margin:8px 5px auto auto; text-align:center;">
+    <tr>
+      <td valign="top">
+        <div id="MON_circle" class="docircle">
+        </div>
+      </td>
+
+      <td valign="top">
+        <div id="TUE_circle" class="docircle">
+        </div>
+      </td>
+
+      <td valign="top">
+        <div id="WED_circle" class="docircle">
+        </div>
+      </td>
+
+      <td valign="top">
+        <div id="THUR_circle" class="docircle">
+        </div>
+      </td>
+
+      <td valign="top">
+        <div id="FRI_circle" class="docircle">
+        </div>
+      </td>
+
+      <td valign="top">
+        <div id="SAT_circle" class="docircle">
+        </div>
+      </td>
+
+      <td valign="top">
+        <div id="SUN_circle" class="docircle">
+        </div>
+      </td>
+
+    </tr>
+  </table>
+
+
+  <!--요일 체크-->
+  <table cellpadding="0" cellspacing="0" border="0" style="width:100%; margin:0 auto; text-align:center;">
+    <tr>
+      <td valign="top">
+        <button  id="MON" data="MON" class="programNo" ng-click="getListByDay($event)">
+        <span for="MON" style="font-size:14px"><b>월</b></span>
+      </button>
+      </td>
+
+      <td valign="top">
+        <button  id="TUE" data="TUE" class="programNo" ng-click="getListByDay($event)">
+        <label for="TUE"><b>화</b></label>
+        </button>
+      </td>
+
+      <td valign="top">
+        <button  id="WED" data="WED" class="programNo" ng-click="getListByDay($event)">
+        <label for="WED"><b>수</b></label>
+        </button>
+      </td>
+
+      <td valign="top">
+        <button  id="THUR" data="THUR" class="programNo" ng-click="getListByDay($event)">
+        <label for="THUR"><b>목</b></label>
+        </button>
+      </td>
+
+      <td valign="top">
+        <button  id="FRI" data="FRI" class="programNo" ng-click="getListByDay($event)">
+        <label for="FRI"><b>금</b></label>
+        </button>
+      </td>
+
+      <td valign="top">
+        <button  id="SAT" data="SAT" class="programNo" ng-click="getListByDay($event)">
+        <label for="SAT"><b>토</b></label>
+        </button>
+      </td>
+
+      <td valign="top">
+        <button  id="SUN" data="SUN" class="programNo" ng-click="getListByDay($event)">
+        <label for="SUN"><b>일</b></label>
+        </button>
+      </td>
+
+
+    </tr>
+  </table>
+
+  <div style="line-height:80%;">
+    <br>
+  </div>
+
+
+    <section>
+      <div class="list">
+        <ion-tree-list items="programs" collapsed="true"></ion-tree-list>
+      </div>
+    </section>
+
+  </ion-content>
+</ion-view>

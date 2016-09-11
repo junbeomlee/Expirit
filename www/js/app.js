@@ -190,7 +190,6 @@ $ionicConfigProvider.tabs.position('bottom');
         templateUrl: 'templates/intro/join.html'
 
   })
-
   .state('tab.etc', {
     url: '/etc',
     views: {

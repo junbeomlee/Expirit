@@ -16,14 +16,12 @@ var trueObjectToValue = function(object){
   }
 }
 
-
 angular.module('expirit.controllers')
 .controller('questController', function($scope,$rootScope,QuestService) {
   $scope.title=""
   $scope.templateValue=1;
   $scope.templatePrefix='page';
-
-
+  
   $scope.gender="none";
   $scope.checkboxGender = {
        male : true,
@@ -50,8 +48,8 @@ angular.module('expirit.controllers')
        SAT : false,
        SUN : false,
   };
-  $scope.weight=75;
 
+  $scope.weight=75;
   $scope.end = function(){
     alert("데이터를 보냅니다.");
     var update={

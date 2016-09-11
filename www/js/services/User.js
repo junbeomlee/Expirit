@@ -14,7 +14,6 @@ angular.module('expirit.services')
 	var userTest1='Y';//테스트1 티폴트로 통과
 	var userTest2='Y';//테스트2 디폴트로 통과
 
-
 	return {
 		userEmail: userEmail,
 		userName:userName,
