@@ -1,4 +1,3 @@
-
 var trueObjectToList = function(object){
   var output=[];
   for(var key in object){
@@ -16,17 +15,24 @@ var trueObjectToValue = function(object){
   }
 }
 
+
 angular.module('expirit.controllers')
-.controller('questController', function($scope,$rootScope,QuestService) {
+.controller('questController', function($scope,$rootScope,QuestService,ionicDatePicker) {
+
+  $scope.backpage=function(){
+    $scope.templateValue--;
+  }
+
   $scope.title=""
   $scope.templateValue=1;
   $scope.templatePrefix='page';
-  
+
   $scope.gender="none";
   $scope.checkboxGender = {
        male : true,
        female : false
   };
+
   $scope.checkboxPurpose = {
        lose : false,
        keep : false,
@@ -49,7 +55,46 @@ angular.module('expirit.controllers')
        SUN : false,
   };
 
-  $scope.weight=75;
+
+  $scope.userWeight=50;
+  $scope.up=function(){
+    $scope.weight++;
+  }
+  $scope.down=function(){
+    $scope.weight--;
+  }
+  //데이트 피커 관리하는 컨트롤러 부분
+  $scope.birthday = new Date();
+  $scope.minDate = new Date(2105, 6, 1);
+  $scope.maxDate = new Date(2015, 6, 31);
+    var ipObj1 = {
+    callback: function (val) {  //Mandatory
+      console.log('Return value from the datepicker popup is : ' + val, new Date(val));
+      $scope.userBirthday=new Date(val);
+    },
+    disabledDates: [            //Optional
+    new Date(2016, 2, 16),
+    new Date(2015, 3, 16),
+    new Date(2015, 4, 16),
+    new Date(2015, 5, 16),
+    new Date('Wednesday, August 12, 2015'),
+    new Date("08-16-2016"),
+    new Date(1439676000000)
+    ],
+    from: new Date(1920, 1, 1), //Optional
+    to: new Date(2016, 10, 30), //Optional
+    inputDate: new Date(),      //Optional
+    mondayFirst: true,          //Optional
+    //disableWeekdays: ,       //Optional
+    closeOnSelect: false,       //Optional
+    templateType: 'modal'       //Optional
+    };
+
+    $scope.openDatePicker = function(){
+    ionicDatePicker.openDatePicker(ipObj1);
+    };
+
+
   $scope.end = function(){
     alert("데이터를 보냅니다.");
     var update={
@@ -58,7 +103,7 @@ angular.module('expirit.controllers')
       purpose : trueObjectToValue($scope.checkboxPurpose),
     }
     console.log(trueObjectToList($scope.checkboxDay));
-    QuestService.apiUpdateUser();
-    location.href="#/tab/home";
+    //QuestService.apiUpdateUser();
+    location.href="#/interview";
   }
 })

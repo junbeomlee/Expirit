@@ -1,0 +1,169 @@
+<ion-view ng-controller="introController">
+  <ion-nav-title>
+  <div style="overflow:hidden; position:absolute; top:50%; margin-top:-15px">
+  <!-- 플롯쓰면 상위 div에서 오버플로우 히든 해야함 플로-->
+    <button class="button icon-left ion-chevron-left button-clear button-dark" style="float:left; color:white;" 
+    ng-click="backpage()" ng-show="templateValue==2">Back</button>
+    <!--버튼 헤이트 값이 30이었으므로 그 반절인 -15px을 마진 탑으로 주었다.-->
+  </div>
+
+  <font ng-show="templateValue==2">
+    로그인
+  </font>
+  </ion-nav-title>
+
+
+  <!--담는 부분-->
+  <ion-content style="background-color:#01b6ad">
+    <ng-include src="templatePrefix+templateValue"></ng-include>
+  </ion-content>
+
+
+ <!-- 바닥에 붙는 풀 버튼 -->
+
+<div class="login-form" style="position: absolute; bottom: 0px; width: 100%" ng-show="((templatePrefix+templateValue)=='page1')">
+    <div class="row">
+        <div class="col text-center">
+            <button class="button button-block expirit_text icon-left ion-social-facebook" onclick="location.href='#/join'">회원가입</button>
+            <button class="button button-block expirit_bg icon-left ion-social-googleplus" 
+            ng-click="(templateValue=2);"
+            style="border-style: solid;border-color: #ffffff" >
+            이미계정이 있으신가요? 
+            <b>로그인</b>
+            </button>
+        </div>
+    </div>
+</div>
+
+
+<script type="text/ng-template" id="page1">
+    <section>
+        <div class="row">
+          <div class="col">
+            <br>
+            <br>
+          
+            <!--슬라이드 내용 부분-->
+              <ion-slide-box on-slide-changed="slideHasChanged($index)">
+
+              <ion-slide>
+                <div class="box blue" align="center">
+                <img src="img/logo/white.png" style="width: 200px; height: auto;"/><br>
+                <h3 style="color:#ffffff"><b>EXPIRIT에 오신것을 환영합니다.</b></br></h3>
+                
+                <p style="color:#ffffff">Expirit은 지금 당장 실천할 수 있는 </br>
+                맞춤형 운동 프로그램을 제공합니다.</p>
+                <br>
+              </div>
+              </ion-slide>
+
+              <ion-slide>
+                <div class="box yellow" align="center">
+              <img src="img/icons/calendar.png" style="width: 200px; height: auto;"/><br>
+                <h3 style="color:#ffffff"><b>계획적인 운동</b></br></h3>
+                
+                <p style="color:#ffffff">EXPIRIT은 운동 수준, 요일, 신체 테스트를 통해</br>
+                당신에게 꼭 맞는 운동 계획은 짜드립니다.</p>
+              <br>
+              </div>
+              </ion-slide>
+
+              <ion-slide>
+                <div class="box pink" align="center">
+              <img src="img/icons/graph.png" style="width: 200px; height: auto;"/><br>
+                <h3 style="color:#ffffff"><b>과학적인 운동</b></br></h3>
+                
+                <p style="color:#ffffff">어제 했던 운동을 그대로 하고 있나요?</br>
+                운동 기록 분석을 통해 당신에게 더욱 곡 맞는<br>
+                운동으로 거듭납니다.</p>
+              <br><br>
+              </div>
+              </ion-slide>
+
+               <ion-slide>
+              <div class="box pink" align="center">
+              <img src="img/icons/puzzle.png" style="width: 200px; height: auto;"/><br>
+                <h3 style="color:#ffffff"><b>불편없는 운동</b></br></h3>
+                
+                <p style="color:#ffffff">Expirit은 지금 당장 실천할 수 있는 </br>
+                맞춤형 운동 프로그램을 제공합니다.</p>
+              <br>
+              </div>
+              </ion-slide>
+
+            </ion-slide-box>
+
+          </div>
+        </div>     
+      </section>
+</script>
+
+
+
+
+
+<script type="text/ng-template" id="page2">
+  <section>
+  <div class="row responsive-sm">
+    <div class="col"><br></div>
+    <div class="col"><br></div>
+    <div class="col text-center">
+      <button class="button  button-block expirit_text icon-left ion-social-facebook" href="#/main3"><b>페이스북으로 로그인</b></button>
+      <button class="button  button-block expirit_text icon-left ion-social-googleplus" href="#/main3"><b>구글로 로그인</b></button>
+      <form action="http://validator.w3.org/check" method="get">
+        <label class="item item-input" >
+          <i class="icon ion-person placeholder-icon"></i>
+            <input type="text" id="email" placeholder="아이디">
+          </label>
+
+        <label class="item item-input">
+          <i class="icon ion-locked placeholder-icon"></i>
+          <input type="text" id="passwd" placeholder="비밀번호">
+
+        </label>
+      </form>
+    </div>
+
+    <div class="col">
+      <button class="button  button-block expirit_text" ng-click="login()"><b>로그인</b></button>
+    </div>
+
+    <div class="col"><br><br><br><br></div>
+  </div>
+          </div>
+        </div>
+      </div>
+  </section>   
+</script>
+
+<script type="text/ng-template" id="page4">
+  <section>
+    <div class="row" align="left" style="position: absolute; left:30px; top:50px">
+      <font class="gray question">
+      당신의 몸무게는 얼마인가요?</br></br>
+      <br><br><br>
+      </font>
+    </div>
+
+    <br><br><br><br><br><br><br><br><br><br>
+
+      <div style="text-align:center;">
+        <div  class="arrow-up" ng-click="weight=weight+1" />
+      </div>
+
+      <div class="row">
+        <div class="col col-33 col-offset-33">
+          <div class="centered">
+                {{weight}}
+          </div>
+        </div>
+      </div>
+
+      <div style="text-align:center;">
+        <div  class="arrow-down" ng-click="weight=weight-1" style="display:bolck;"/>
+      </div>
+  </section>
+</script>
+
+
+</ion-view>

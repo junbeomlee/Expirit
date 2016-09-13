@@ -1,0 +1,337 @@
+ <ion-view ng-init="init()">
+  <ion-nav-title>
+  <div style="overflow:hidden; position:absolute; top:50%; margin-top:-15px">
+    <!-- 플롯쓰면 상위 div에서 오버플로우 히든 해야함 플로-->
+    <button class="button icon-left ion-chevron-left button-clear button-dark" style="float:left; color:white;" 
+    ng-click="backpage()" ng-show="(templateValue=1)">Back</button>
+    <!--버튼 헤이트 값이 30이었으므로 그 반절인 -15px을 마진 탑으로 주었다.-->
+  </div>
+    {{exName}}
+  </ion-nav-title>
+
+  <ion-nav-button side="left">
+  <div>sdf</div>
+  </ion-nav-button>
+
+  <ion-content style="background-color:#EBEBED">
+
+<!--상단 운동 진행바-->
+<div class="button-bar" ng-show='processBar()'>
+  <a ng-click="processDown()" class="button"><b><</b></a>
+  <a class="button"><font id="set1" ><b>1</b></font></a>
+  <a class="button"><font id="set2" ><b>2</b></font></a>
+  <a class="button"><font id="set3" ><b>3</b></font></a>
+  <a class="button"><font id="set4" ><b>4</b></font></a>
+  <a class="button"><font id="set5" ><b>5</b></font></a>    
+  <a ng-click="processUp()" class="button"><b>></b></a>
+</div>
+  <ng-include src="templatePrefix+templateValue"></ng-include>
+  </ion-content>
+  
+  <!--바닥에 붙는 버튼-->
+  <div class="login-form" style="position:fixed; bottom: 0px; width: 100%;background: #ebebeb;">
+	  <hr class="style1">
+	    <!--페이지1의 버튼-->
+	    <div class="row" ng-show="(templateValue==1)">
+	        <div class="col text-center">
+	            <a class="button button-block expirit_bg" ng-click="page1_button()">네 배웠습니다.</a>
+	            <a class="button button-block expirit_bg" ng-click="templateValue=5">아니요 처음입니다.</a>
+	        </div>
+	    </div>
+	
+	    <!--페이지2의 버튼-->
+	    <div class="row" ng-show="(templateValue==2)">
+	        <div class="col text-center">
+	            <a class="button button-block expirit_bg" ng-click="page2_button()">완료</a>
+	        </div>
+	    </div>
+	
+	    <!--페이지3의 버튼-->
+	    <div class="row" ng-show="(templateValue==3)">
+	        <div class="col text-center">
+	            <a class="button button-block expirit_bg" ng-click="stop()">일시중지</a>
+	            <a class="button button-block expirit_bg" ng-click="templateValue=2">다음세트 시작</a>
+	        </div>
+	    </div>
+	
+	    <!--페이지4의 버튼-->
+	    <div class="row" ng-show="(templateValue==4)">
+	        <div class="col text-center">
+	            <a class="button button-block expirit_bg" ng-click="processUp()">다음 운동 시작</a>
+	            <a class="button button-block expirit_bg" href="#/tab/home">홈으로</a>
+	        </div>
+	    </div>
+	
+	    <!--페이지5의 버튼-->
+	    <div class="row" ng-show="(templateValue==5)">
+	        <div class="col text-center">
+	            <a class="button button-block expirit_bg" ng-click="templateValue=2">시작하기</a>
+	        </div>
+	    </div>
+	
+	</div>
+
+<!--페이지1-->
+<script type="text/ng-template" id="page1">
+
+  <section>
+    <img src="/img/deadLift.png"style="width: 100%;height: auto;" alt="" />
+    <div class="col text-center" style="height:150px;padding-bottom:250px;justify-content: center; /* align horizontal */align-items: center;">
+    <br><br><br>
+      <font class="main">
+      "{{exName}}"를 배운 적이 있나요?
+      </font>
+    </div>
+  </section>
+</script>
+
+<!--페이지2-->
+<script type="text/ng-template" id="page2">
+    <div class="contents" style="position:relative;padding-bottom:60px;" >
+
+    <!--이미지 나타나는 부분-->
+    <section class="">
+      <img src="img/deadLift.png"style="width: 100%;height: auto;" alt="" />
+    </section>
+
+    <!--코어섹션-->
+    <section class="core-section" style="margin-bottom:20px;padding:15px; text-align:center;">
+
+
+
+      <!--1세트시 부분-->
+      <div ng-show="(exSet==1)"> 
+        <font class="medium">
+        {{exSet}}세트 "{{exRoutine.one_weight}}kg"으로 {{exRoutine.one_rep}}회 실시하세요!
+        </font>
+        <br><br><br>
+        <!--입력받는 화살표 버튼-->
+    		<div class="row">
+    			<a class="arrow-up" ng-click="up()" style="font-size:0"> 버튼 </a>
+    		</div>
+
+        <div class="row" style="height:83px;text-align:center;margin-top:25px;">
+          <div class="col col-12">
+            <div class="" style="position:absolue; top:50%; margin-tom:40px; font-size:80px;">
+          		<b>{{exRoutine.one_rep}}</b>
+            </div>
+          </div>
+        </div>
+
+    		<div class="row">
+    			<a  class="arrow-down" ng-click="down()" style="font-size:0">버튼</a>
+    		</div>
+      </div>
+
+
+
+      <!--2세트시 부분-->
+      <div ng-show="(exSet==2)"> 
+        <font class="medium">
+        {{exSet}}세트 "{{exRoutine.two_weight}}kg"으로 {{exRoutine.two_rep}}회 실시하세요!
+        </font>
+        <br><br><br>
+        <!--입력받는 화살표 버튼-->
+        <div class="row">
+          <a class="arrow-up" ng-click="up()" style="font-size:0"> 버튼 </a>
+        </div>
+
+        <div class="row" style="height:83px;text-align:center;margin-top:25px;">
+          <div class="col col-12">
+            <div class="" style="position:absolue; top:50%; margin-tom:40px; font-size:80px;">
+              <b>{{exRoutine.two_rep}}</b>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <a  class="arrow-down" ng-click="down()" style="font-size:0">버튼</a>
+        </div>
+      </div>
+
+      <!--3세트시 부분-->
+      <div ng-show="(exSet==3)"> 
+        <font class="medium">
+        {{exSet}}세트 "{{exRoutine.three_weight}}kg"으로 {{exRoutine.three_rep}}회 실시하세요!
+        </font>
+        <br><br><br>
+        <!--입력받는 화살표 버튼-->
+        <div class="row">
+          <a class="arrow-up" ng-click="up()" style="font-size:0"> 버튼 </a>
+        </div>
+
+        <div class="row" style="height:83px;text-align:center;margin-top:25px;">
+          <div class="col col-12">
+            <div class="" style="position:absolue; top:50%; margin-tom:40px; font-size:80px;">
+              <b>{{exRoutine.three_rep}}</b>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <a  class="arrow-down" ng-click="down()" style="font-size:0">버튼</a>
+        </div>
+      </div>
+
+      <!--4세트시 부분-->
+      <div ng-show="(exSet==4)"> 
+        <font class="medium">
+        {{exSet}}세트 "{{exRoutine.four_weight}}kg"으로 {{exRoutine.four_rep}}회 실시하세요!
+        </font>
+        <br><br><br>
+        <!--입력받는 화살표 버튼-->
+        <div class="row">
+          <a class="arrow-up" ng-click="up()" style="font-size:0"> 버튼 </a>
+        </div>
+
+        <div class="row" style="height:83px;text-align:center;margin-top:25px;">
+          <div class="col col-12">
+            <div class="" style="position:absolue; top:50%; margin-tom:40px; font-size:80px;">
+              <b>{{exRoutine.four_rep}}</b>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <a  class="arrow-down" ng-click="down()" style="font-size:0">버튼</a>
+        </div>
+      </div>
+
+      <!--5세트시 부분-->
+      <div ng-show="(exSet==5)"> 
+        <font class="medium">
+        {{exSet}}세트 "{{exRoutine.five_weight}}kg"으로 {{exRoutine.five_rep}}회 실시하세요!
+        </font>
+        <br><br><br>
+        <!--입력받는 화살표 버튼-->
+        <div class="row">
+          <a class="arrow-up" ng-click="up()" style="font-size:0"> 버튼 </a>
+        </div>
+
+        <div class="row" style="height:83px;text-align:center;margin-top:25px;">
+          <div class="col col-12">
+            <div class="" style="position:absolue; top:50%; margin-tom:40px; font-size:80px;">
+              <b>{{exRoutine.five_rep}}</b>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <a  class="arrow-down" ng-click="down()" style="font-size:0">버튼</a>
+        </div>
+      </div>
+    </section>  
+    </div>
+</script>
+
+<!--페이지3-->
+<script type="text/ng-template" id="page3">
+  <div class="row">
+    <br><br>
+  </div>
+
+  
+  <div id="bigCircle">
+    <div class="progress-wrapper">
+            <div class="progress ng-cloak" ng-style="getStyle()">{{ myTimer }}</div>
+            <round-progress
+                max="myTimerFixed"
+                current="myTimer"
+                color="#45ccce"
+                bgcolor="#eaeaea"
+                radius="100"
+                semi="isSemi"
+                rounded="rounded"
+                stroke="10"
+                clockwise="clockwise"
+                responsive="true"
+                duration="500"
+                offset="0"
+                animation-delay="0">
+
+                <svg>
+                    <linearGradient id="gradient" x1="0" x2="0" y1="0" y2="1">
+                        <stop offset="5%"  stop-color="green"/>
+                        <stop offset="95%" stop-color="gold"/>
+                    </linearGradient>
+                </svg>
+            </round-progress>
+    </div>
+  </div>
+
+  <div class="row" align="center">
+  <h4><b>{{myTimer}}초간 휴식하세요.<br>쉬면서 몸을 풀어주세요</b></h4>
+  <br>
+  </div>
+
+  <div class="row">
+  <button ng-click="start()">Start The Timer</button><br>
+  </div>
+</script>
+
+<!--페이지4-->
+<script type="text/ng-template" id="page4">
+       <div class="card">
+        <div class="item item-divider">
+            A line chart
+        </div>
+        <div class="item item-text-wrap">
+            <canvas id="line" class="chart chart-line" data="data" labels="labels" legend="true" series="series" options="{showTooltips: false}"></canvas>
+        </div>
+    </div>
+      <div class="col text-center" style="height:150px;justify-content: center; /* align horizontal */align-items: center;">
+        <h4>축하합니다. 상위 32.5%에 진입하셨습니다.<br>
+    이남훈님의 기록을 통해 더욱 정확한<br>
+    프로그램을 제공해 드립니다.</h4>
+      </div>
+
+</script>
+
+<script type="text/ng-template" id="page5">
+    <div align="center" class="contents">
+      <section class="" style="background-color:#ffffff;padding:15px;padding-top:80px;padding-bottom:80px;margin-bottom:10px">
+      <font class="main">
+      "{{exName}}"가 처음이시군요!
+      </font>
+
+      <br><br>
+      <div style="text-align:left; margin-left:30px">
+      <font class="description">
+        {{userName}}님의 체중 {{userweight}}kg인 다른사람들은
+        <br>
+        평균 {{exWeight}}kg로 8~12회 반복 운동을 하고 있어요!
+      </font>
+      </div>
+
+      </section>
+
+    <!--운동 횟수 입력 섹션-->
+    <section class="core-section" style="margin-bottom:10px;padding:15px">
+    <div align="center">
+      <font class="medium">몇 kg으로 운동 하시겠습니까?</font>
+    </div>
+    <br><br>
+        <!--입력받는 화살표 버튼-->
+    <div class="row">
+      <a class="arrow-up" ng-click="up()" style="font-size:0"> 버튼 </a>
+    </div>
+
+    <div class="row" style="height:83px;text-align:center;margin-top:25px;">
+      <div class="col col-12">
+        <div class="" style="position:absolue; top:50%; margin-tom:40px; font-size:80px;">
+          <b>{{exRoutine.one_rep}}</b>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <a  class="arrow-down" ng-click="down()" style="font-size:0">버튼</a>
+    </div>
+
+    </section>  
+    </div>
+    </section>  
+    </div>
+</script>
+
+</ion-view>

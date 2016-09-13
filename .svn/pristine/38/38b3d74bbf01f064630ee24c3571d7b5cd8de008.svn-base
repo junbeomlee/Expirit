@@ -1,0 +1,309 @@
+<ion-view>
+  <ion-nav-title>
+    <div class="bar bar-header">
+      <div class="h1 title">{{templateValue}}</div>
+    </div>
+  </ion-nav-title>
+  
+  <ion-content>
+
+    <!--<p>Select page content template via dropdown</p>
+    <select ng-model="template">
+      <option value="page1">Page 1</option>
+      <option value="2">Page 2</option>
+      <option value="3">Page 3</option>
+      <option value="4">Page 4</option>
+      <option value="page5">Page 5</option>
+      <option value="page6">Page 6</option>
+      <option value="page7">Page 7</option>
+      <option value="page8">Page 8</option>
+    </select>
+  -->
+    <ng-include src="templatePrefix+templateValue"></ng-include>
+
+  </ion-content>
+
+
+<!--바닥에 붙는 버튼-->
+  <div class="" style="position: absolute; bottom: 20px; right:15px; width: 100%">
+    <div class="row" ng-click="(templateValue==8 ? end() : templateValue=templateValue+1)">
+        <button class="button button-float">
+          <i class="ion-arrow-right-b"></i>
+        </button>
+    </div>
+  </div>
+
+
+
+
+  <script type="text/ng-template" id="page1">
+    <section>
+      <div align="left" style="position: absolute; left:30px; top:130px">
+        <font class="gray question">
+        가입이 거의 끝났습니다!</br></br>
+        고객님의 맞춤형 운동 프로그램을 </br></br>
+        위하여 다음 몇가지 질문에</br></br>
+        대답해주세요
+        </font>
+      </div>
+    </section>
+  </script>
+
+
+
+
+
+
+
+  <script type="text/ng-template" id="page2">
+    <section>
+      <div class="row" style="position: absolute; left:30px; top:50px">
+        <font class="gray question">
+          당신의 생일을 입력하세요.
+        </font>
+      </div>
+
+      <br><br><br><br><br>
+
+      <label class="item item-input">
+        <span class="input-label">
+          <button class="button button-block button-positive" ng-click="openDatePicker()">
+            {{ birthday | date:'MMMM/dd/yyyy' }}
+          </button>
+
+        </span>
+      </label>
+      <input type="date">
+      <label class="item item-input">
+        <span class="input-label">Month</span>
+        <input type="month">
+      </label>
+    </section>
+  </script>
+
+
+
+
+
+
+
+
+
+
+  <script type="text/ng-template" id="page3">
+    <section>
+      <div class="row" align="left" style="position: absolute; left:30px; top:50px">
+        <font class="gray question">
+        당신의 성별은 무엇입니까?</br></br>
+        대답해주세요
+        <br><br><br>
+        </font>
+      </div>
+      <br><br><br><br><br><br><br><br><br><br>
+        <table cellpadding="0" cellspacing="0" border="0" style="width:60%; margin:auto;">
+          <tr>
+            <td valign="top">
+                <input type='checkbox' ng-click="checkboxGender.female=false" ng-model="checkboxGender.male" 
+                value='male' id="male" class="imgcheck_male"/>
+                <label for="male"></label>
+            </td>
+
+            <td><font color="white">aaa</font></td>
+            <td valign="top">
+                <input type='checkbox' ng-click="checkboxGender.male=false" ng-model="checkboxGender.female" 
+                value='female' id="female" class="imgcheck_female" />
+                <label for="female"></label>
+            </td>
+          </tr>
+        </table>
+
+    </section>
+  </script>
+
+
+
+
+  <script type="text/ng-template" id="page4">
+    <section>
+      <div class="row" align="left" style="position: absolute; left:30px; top:50px">
+        <font class="gray question">
+        당신의 몸무게는 얼마인가요?</br></br>
+        <br><br><br>
+        </font>
+      </div>
+
+      <br><br><br><br><br><br><br><br><br><br>
+
+        <div style="text-align:center;">
+          <div  class="arrow-up" ng-click="up()" />
+        </div>
+
+        <div class="row">
+          <div class="col col-33 col-offset-33">
+            <div class="centered">
+                  {{weight}}
+            </div>
+          </div>
+        </div>
+
+        <div style="text-align:center;">
+          <div  class="arrow-down" ng-click="down()" style="display:bolck;"/>
+        </div>
+    </section>
+  </script>
+
+
+
+
+
+  <script type="text/ng-template" id="page5">
+    <section>
+      <div align="left" style="position: absolute; left:30px; top:50px">
+        <font class="gray question">
+        체중에 대한 목표를 고르세요.</br></br>
+        <br><br><br>
+        </font>
+
+      </div>
+      <br><br><br><br><br><br><br><br><br><br><br>
+        <table cellpadding="0" cellspacing="0" border="0" style="width:60%; margin:auto; text-align:center;">
+          <tr>
+            <td valign="top">
+              <input type='checkbox' ng-click="checkboxPurpose.keep=false;checkboxPurpose.gain=false" 
+              ng-true-value="'009001'" id="lose" class="imgcheck_lose" ng-model="checkboxPurpose.lose"/>
+              <label for="lose"></label>
+            </td>
+            <td valign="top">
+              <input type='checkbox' ng-click="checkboxPurpose.lose=false;checkboxPurpose.gain=false" ng-true-value="'009002'" id="keep" class="imgcheck_keep" ng-model="checkboxPurpose.keep"/>
+              <label for="keep"></label>
+            </td>
+            <td valign="top">
+              <input type='checkbox' ng-click="checkboxPurpose.lose=false;checkboxPurpose.keep=false" ng-true-value="'009003'" id="gain" class="imgcheck_gain" ng-model="checkboxPurpose.gain"/>
+              <label for="gain"></label>
+            </td>
+          </tr>
+          <tr>
+            <td><font class="expirit_text">체중 감량</font></td>
+            <td><font class="expirit_text">체중 유지</font></td>
+            <td><font class="expirit_text">체중 증가</font></td>
+          </tr>
+        </table>
+    </section>
+  </script>
+
+
+  <script type="text/ng-template" id="page6">
+    <section>
+      <div class="row" align="left" style="position: absolute; left:30px; top:50px">
+        <font class="gray question">
+        선호하는 운동 종류를 고르세요</br></br>
+        <br><br><br>
+        </font>
+      </div>
+
+      <br><br><br><br><br><br><br><br><br><br>
+        <table cellpadding="0" cellspacing="0" border="0" style="width:60%; margin:auto;">
+          <tr>
+            <td valign="top" ng-click="freeweight_checked()">
+              <input type='checkbox' ng-click="checkboxPrefer.machine=false" name='thing' ng-true-value="'007001'" id="freeweight" class="imgcheck_freeweight"
+              ng-model="checkboxPrefer.free"/>
+              <label for="freeweight"></label>
+            </td>
+            <td valign="top" ng-click="machine_checked()">
+              <input type='checkbox'ng-click="checkboxPrefer.free=false" name='thing' ng-true-value="'007002'" id="machine" class="imgcheck_machine"
+              ng-model="checkboxPrefer.machine"/>
+              <label for="machine"></label>
+            </td>
+          </tr>
+        </table>
+    </section>
+  </script>
+
+  <script type="text/ng-template" id="page7">
+    <section>
+      <div align="left" style="position: absolute; left:30px; top:50px">
+        <font class="gray question">
+        당신의 운동 수준을 고르세요.</br></br><br><br><br>
+        </font>
+          <button class="button button-clear expirit_text" ng-click="checkboxLevel.level='010002'" ng-model="checkboxLevel.level">
+            <font class="regular" size="4">헬스장을 밟은 적이 없는 <b>운동 초보</b></font>
+          </button>
+          <br><hr class="colored"><br>
+          <button class="button button-clear expirit_text" ng-click="checkboxLevel.level='010002'" ng-model="checkboxLevel.level">
+            <font class="regular" size="4">헬스장은 가끔씩 가는 <b>운동 중급자</b></font>
+          </button>
+          <br><hr class="colored"><br>
+          <button class="button button-clear expirit_text" ng-click="checkboxLevel.level='010002'" ng-model="checkboxLevel.level">
+            <font class="regular" size="4">꾸준히 헬스장을 찾아다니는 <b>운동 고수</b></font>
+          </button>
+          <br><hr class="colored"><br>
+          <button class="button button-clear expirit_text" ng-click="checkboxLevel.level='010002'" ng-model="checkboxLevel.level">
+            <font class="regular" size="4">운동은 곧 나의 삶! <b>운동 프로</b></font>
+          </button>
+          <br><hr class="colored"><br>
+
+      </div>
+	</section>
+
+
+  </script>
+  <script type="text/ng-template" id="page8">
+    <section>
+      <div class="row" align="left" style="position: absolute; left:30px; top:50px">
+        <font class="gray question">
+        운동하실 요일을 고르세요.</br></br>
+        </font>
+      </div>
+      <br><br><br><br><br><br><br><br>
+  <!--요일 체크-->
+  <!--요일 체크-->
+        <table cellpadding="0" cellspacing="0" border="0" style="width:60%; margin:auto;">
+          <tr>
+            <td valign="top">
+                <input type='checkbox' name='thing' value='valuable' id="mon" ng-model="checkboxDay.MON"/>
+                <label for="mon"></label>
+            </td>
+            <td><font color="white">s</font></td>
+            <td valign="top">
+                <input type='checkbox' name='thing' value='valuable' id="tue" ng-model="checkboxDay.TUE"/>
+                <label for="tue"></label>
+            </td>
+            <td><font color="white">s</font></td>
+            <td valign="top">
+                <input type='checkbox' name='thing' value='valuable' id="wed" ng-model="checkboxDay.WED"/>
+                <label for="wed"></label>
+            </td>
+            <td><font color="white">s</font></td>
+            <td valign="top">
+                <input type='checkbox' name='thing' value='valuable' id="thur" ng-model="checkboxDay.THR"/>
+                <label for="thur"></label>
+            </td>
+            <td><font color="white">s</font></td>
+            <td valign="top">
+                <input type='checkbox' name='thing' value='valuable' id="fri" ng-model="checkboxDay.FRI"/>
+                <label for="fri"></label>
+            </td>
+            <td><font color="white">s</font></td>
+            <td valign="top">
+                <input type='checkbox' name='thing' value='valuable' id="sat" ng-model="checkboxDay.SAT"/>
+                <label for="sat"></label>
+            </td>
+            <td><font color="white">s</font></td>
+            <td valign="top">
+                <input type='checkbox' name='thing' value='valuable' id="sun" ng-model="checkboxDay.SUN"/>
+                <label for="sun"></label>
+            </td>
+          </tr>
+        </table>
+
+
+      <div style="position: absolute; left:30px; top:400px">
+        <font class="expirit_text small">
+          일주일에 2~4일 가량 운동하는 것이 가장 적당합니다.</br>
+          만약 2일 혹은 3일만 운동을 하실 경우 연속한 요일은 </br>
+          피하는게 효과적인 운동에 도움이 됩니다.
+        </font>
+      </div>
+  </section>
+  </script>
+</ion-view>

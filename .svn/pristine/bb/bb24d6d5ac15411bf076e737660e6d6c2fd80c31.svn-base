@@ -1,0 +1,172 @@
+<ion-view ng-controller="interviewController">
+  <!--담는 부분-->
+  <ion-content style="background-color:#ffffff">
+  <ng-include src="templatePrefix+templateValue"></ng-include>
+  </ion-content>
+
+<!-- 바닥에 붙는 풀 버튼 -->
+<div class="login-form" style="position: absolute; bottom: 0px; width: 100%">
+        <!--페이지1버튼-->
+        <div class="row" ng-show='(templateValue==1)'>
+          <div class="col text-center">
+            <button class="button button-block expirit_bg" 
+            ng-click="(templateValue==8 ? end() : templateValue=templateValue+1)" >
+              <font>
+                시작하기
+              </font>
+            </button>
+            <button class="button button-block expirit_text" 
+            style="border-style: solid;border-color: #00b5ac">
+              <font>
+                자신있어요. 그냥 시작할래요
+              </font>
+            </button>
+          </div>
+        </div>
+
+        <!--페이지2버튼-->
+        <div class="row" ng-show='templateValue==2'>
+          <div class="col text-center">
+          <button class="button button-block expirit_bg" 
+          ng-click="templateValue=3">네</button>
+          <button class="button button-block expirit_text"
+          style="border-style: solid;border-color: #00b5ac"
+          ng-click="templateValue=4">
+          아니오
+          </button>
+          </div>
+        </div>
+
+        <!--페이지3버튼-->
+        <div class="row" ng-show='templateValue==3'>
+          <div class="col text-center">
+          <button class="button button-block expirit_bg" 
+          ng-click="templateValue=6">네</button>
+          <button class="button button-block expirit_text"
+          style="border-style: solid;border-color: #00b5ac"
+          ng-click="templateValue=5">
+          아니오</button>
+          </div>
+        </div>   
+
+        <!--페이지4버튼-->
+        <div class="row" ng-show='templateValue==4'>
+          <div class="col text-center">
+          <button class="button button-block expirit_bg" 
+          ng-click="templateValue=3">다음</button>
+          </div>
+        </div>        
+
+        <!--페이지5버튼-->
+        <div class="row" ng-show='templateValue==5'>
+          <div class="col text-center">
+          <button class="button button-block expirit_bg" 
+          ng-click="templateValue=6">다음</button>
+          </div>
+        </div>  
+
+        <!--페이지6버튼-->
+        <div class="row" ng-show='templateValue==6'>
+          <div class="col text-center">
+          <button class="button button-block expirit_bg" 
+          ng-click="end()">시작하기</button>
+          </div>
+        </div>  
+</div>
+
+
+<!--페이지1-->
+<script type="text/ng-template" id="page1">
+  <section>
+    <div class="row" align="left" style="position: absolute; left:30px; top:50px">
+      <font class="gray question regular">
+        당신의 몸이 건강한지 알아보겠습니다.<br><br>
+        언제든지 '내 운동 상태'에서 체크가<br><br>
+        가능하니 자신 있으시면 넘어가셔도 됩니다.
+        <br><br><br>
+      </font>
+    </div>
+  </section>
+</script>
+
+<!--페이지2 테스트1-->
+<script type="text/ng-template" id="page2">
+  <section>
+    <div class="row" align="left" style="position: absolute; left:30px; top:50px">
+      <font class="gray question regular">
+        다음 동작이 가능한가요?<br><br>
+          <br><br><br>
+      </font>
+    </div>
+  </section>
+</script>
+
+<!--페이지3 테스트2-->
+<script type="text/ng-template" id="page3">
+  <section>
+    <div class="row" align="left" style="position: absolute; left:30px; top:50px">
+      <font class="gray question regular">
+        다음 동작이 가능한가요?<br><br>
+          <br><br><br>
+      </font>
+    </div>
+  </section>
+</script>
+
+<!--페이지4 테스트1 실패페이지-->
+<script type="text/ng-template" id="page4">
+  <section>
+    <div class="row" align="left" style="position: absolute; left:30px; top:50px">
+      <font class="gray question regular">
+        책상에 앉아 계시느라<br><br>
+          어깨가 굳어 지셨네요<br><br><br>
+      </font>
+    </div>
+  </section>
+</script>
+
+<!--페이지5 테스트2 실패페이지-->
+<script type="text/ng-template" id="page5">
+  <section>
+    <div class="row" align="left" style="position: absolute; left:30px; top:50px">
+      <font class="gray question regular">
+        테스트2 통과못함<br><br>
+          어깨가 굳어 지셨네요<br><br><br>
+      </font>
+    </div>
+  </section>
+</script>
+
+<!--페이지6 완료페이지-->
+<script type="text/ng-template" id="page6">
+  <section>
+    <table cellpadding="0" cellspacing="0" border="0" style="width:0%; margin:auto;">
+      <tr>
+        <td valign="top"><img src="img/logo/white.png" style="width:200px; height:200px;"></td>
+      </tr>
+    </table>
+
+    <div class="row" align="left" style="position: absolute; left:30px; top:300px">
+      <font class="gray question regular">
+        축하합니다! 
+        모든 테스트가 끝이 났습니다.<br><br>
+        고객님께 꼭 맞는 운동 프로그램이<br><br>
+        기다리고 있습니다.<br><br>
+        지금 바로 시작하세요!<br>
+      </font>
+    </div>
+  </section>
+</script>
+
+</ion-view>
+
+
+
+
+
+
+
+
+
+
+

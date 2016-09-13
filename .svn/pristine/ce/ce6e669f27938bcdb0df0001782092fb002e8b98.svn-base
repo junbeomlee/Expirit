@@ -1,0 +1,141 @@
+var trueObjectToList = function(object){
+  var output=[];
+  for(var key in object){
+    if(object[key]==true)
+      output.push(key);
+  }
+  return output;
+}
+
+var trueObjectToValue = function(object){
+  for(var key in object){
+    if(object[key]==true){
+      return key;
+    }
+  }
+}
+
+angular.module('expirit.controllers')
+.controller('mainController', function($scope,$rootScope,MainService) {
+
+	$scope.title=""
+	$scope.templateValue=1;
+	$scope.templatePrefix='page';
+
+
+	$scope.exName="데드리프트";
+	$scope.exSet="1";
+
+	$scope.exRoutine = {
+		one_weight : 50,
+		one_freq : 10,
+		two_weight : 50,
+		two_freq : 10,
+		three_weight : 50,
+		three_freq : 10,
+		four_weight : 50,
+		four_freq : 10,
+		five_weight : 50,
+		five_freq :10
+	};
+/*
+	$scope.up=function(set){
+		var setFreq=set+"_freq";
+		exRoutine.(setFreq)=exRoutine.(setFreq)+1;
+	};
+
+	$scope.down=function(set){
+		var setFreq=set+"_freq";
+		exRoutine.(setFreq)=exRoutine.(setFreq)-1;
+	};
+
+*/
+  $scope.end = function(){
+    alert("데이터를 보냅니다.");
+    var update={
+      age : "",
+      weight : $scope.weight,
+      purpose : trueObjectToValue($scope.checkboxPurpose),
+    }
+    console.log(trueObjectToList($scope.checkboxDay));
+    QuestService.apiUpdateUser();
+    location.href="#/tab/home";
+  }
+
+
+
+	$scope.elemId="set";
+	console.log($scope.elemId);
+	$scope.y =document.getElementById($scope.elemId);
+
+	$scope.myTimerFixed=30;
+	$scope.myTimer=30;
+	$scope.radius = 300;
+
+	var myTimerVariable;
+	$scope.numberPickerObject = {
+		inputValue: 0, //Optional
+		minValue: -9007199254740991,
+		maxValue: 9007199254740991,
+		precision: 3,  //Optional
+		decimalStep: 0.25,  //Optional
+		format: "DECIMAL",  //Optional - "WHOLE" or "DECIMAL"
+		unit: "",  //Optional - "m", "kg", "℃" or whatever you want
+		titleLabel: 'Number Picker',  //Optional
+		setLabel: 'Set',  //Optional
+		closeLabel: 'Close',  //Optional
+		setButtonType: 'button-positive',  //Optional
+		closeButtonType: 'button-stable',  //Optional
+		callback: function (val) {    //Mandatory
+			timePickerCallback(val);
+		}
+	};
+
+	$scope.myCustomTimer=function(){
+		$scope.myTimer--;
+		if($scope.myTimer == 0){
+			$timeout.cancel(myTimerVariable);
+			$scope.complete(false);
+			return false;
+		}
+		myTimerVariable = $timeout($scope.myCustomTimer, 1000);
+	}
+	$scope.start=function(){
+		myTimerVariable = $timeout($scope.myCustomTimer, 1000);
+	}
+	$scope.stop=function(){
+		$timeout.cancel(myTimerVariable);
+		complete(true);
+	}
+    $scope.getStyle = function(){
+                var transform =  'translateY(-50%) translateX(-50%)';
+
+                return {
+                    'top':  '50%',
+                    'bottom': 'auto',
+                    'left': '50%',
+                    'transform': transform,
+                    '-moz-transform': transform,
+                    '-webkit-transform': transform,
+                    'font-size': $scope.radius/3.5 + 'px'
+                };
+            };
+	var complete = function (forceFulAbort){
+		if(forceFulAbort){
+			alert('You killed the damn timer');
+		}else{
+			alert('Timer completed');
+		}
+	}
+
+	/*차트 부분*/
+	$scope.labels = ["January", "February", "March", "April", "May", "June", "July"];
+    $scope.series = ['Series A', 'Series B'];
+    $scope.data = [
+        [65, 59, 80, 81, 56, 55, 40],
+        [28, 48, 40, 19, 86, 27, 90]
+    ];
+})
+
+
+
