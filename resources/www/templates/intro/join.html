@@ -1,9 +1,9 @@
-<ion-view ng-controller="joinController">
+<ion-view>
 
   <ion-nav-title>
   <div style="overflow:hidden; position:absolute; top:50%; margin-top:-15px">
     <!-- 플롯쓰면 상위 div에서 오버플로우 히든 해야함 플로-->
-    <button class="button icon-left ion-chevron-left button-clear button-dark" style="float:left; color:white;" 
+    <button class="button icon-left ion-chevron-left button-clear button-dark" style="float:left; color:white;"
     ng-click="backpage()">Back</button>
     <!--버튼 헤이트 값이 30이었으므로 그 반절인 -15px을 마진 탑으로 주었다.-->
   </div>
@@ -30,32 +30,32 @@
 
               <label class="item_nobg item-input" >
             	<img class="join_icon" src="img/icons/person.png"style="width: 20px;height: auto; ">
-                <input class="bordered_input" type="text" placeholder="이름" id="name" ng-model="userName">
+                <input class="bordered_input" type="text" placeholder="이름" id="name" ng-model="user.name">
               </label>
 
               <label class="item_nobg item-input" >
-            	  <img class="join_icon" src="img/icons/mail.png"style="width: 20px;height: auto; "> 
-                <input class="bordered_input" type="text" placeholder="이메일" id="email" ng-model="userEmail">
+            	  <img class="join_icon" src="img/icons/mail.png"style="width: 20px;height: auto; ">
+                <input class="bordered_input" type="text" placeholder="이메일" id="email" ng-model="user.email">
               </label>
 
               <label class="item_nobg item-input">
                 <img class="join_icon" src="img/icons/lock.png"style="width: 20px;height: auto; ">
-                <input class="bordered_input" type="text" placeholder="비밀번호" id="passwd" ng-model="userPassword">
+                <input class="bordered_input" type="text" placeholder="비밀번호" id="passwd" ng-model="user.password">
               </label>
 
               <label class="item_nobg item-input" >
             	<img class="join_icon" src="img/icons/lock.png"style="width: 20px;height: auto; ">
-                <input class="bordered_input" type="text" placeholder="비밀번호 확인하기" id="passwd2" ng-model="userPassword2">
+                <input class="bordered_input" type="text" placeholder="비밀번호 확인하기" id="passwd2" ng-model="user.confirmPassword">
               </label>
 
-              <button class="button  button-block expirit_text" ng-click="join()"><b>가입하기</b></button>
+              <button class="button  button-block expirit_text" ng-click="signUp()"><b>가입하기</b></button>
             </form>
 
           </div>
         </div>
       </div>
-      </section>	
-	
+      </section>
+
     </div>
   </ion-content>
 </ion-view>

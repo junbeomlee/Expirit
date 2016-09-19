@@ -5,8 +5,8 @@ UserDao.$inject=['$cordovaSQLite','DBConnector'];
 function UserDao($cordovaSQLite,DBConnector){
 
   this.add = function(exercise){
-    return DBConnector.query("INSERT INTO exercise (
-      exNo,exName,restSecond,method,exImage,exUrl,exImgSysName,exDefaultSet,exImgPath,exEtc,
+    return DBConnector.query("INSERT INTO exercise (\
+      exNo,exName,restSecond,method,exImage,exUrl,exImgSysName,exDefaultSet,exImgPath,exEtc,\
       exDesc,exLevel,exDepth1,exDepth2,exDepth3) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",exercise);
   };
 
@@ -21,7 +21,7 @@ function UserDao($cordovaSQLite,DBConnector){
 
   //남훈 작성 부분.
   //사용자 정보 수정
-  this.update
+  //this.update
 
 
 

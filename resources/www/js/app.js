@@ -142,7 +142,8 @@ $ionicConfigProvider.tabs.position('bottom');
 
   .state('join', {
     url: '/join',
-        templateUrl: 'templates/intro/join.html'
+        templateUrl: 'templates/intro/join.html',
+        controller: 'joinController'
 
   })
   .state('tab.etc', {

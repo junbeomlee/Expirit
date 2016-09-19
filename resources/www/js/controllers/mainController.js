@@ -31,11 +31,9 @@ angular.module('expirit.controllers')
 	//$scope.exName=MainService.exName; 운동 받아오는 부분
 	console.log(HomeService.exName);
 	$scope.exSet="1";//현재 세트 수
-<<<<<<< .mine
-=======
+
 	$scope.exAvg="50"
-	
->>>>>>> .r117
+
 	$scope.exRoutine = {
 		one_weight:50,
 		one_rep:10,
@@ -72,7 +70,7 @@ angular.module('expirit.controllers')
 */
 
 
-	
+
 	//뒤로가기 버튼 유무
 	$scope.backButton=function(){
 		if($scope.templateValue==2){
@@ -153,9 +151,9 @@ angular.module('expirit.controllers')
 			if($scope.exRoutine.one_rep<1){
 				$scope.exRoutine.one_rep=0;
 			}else{
-				$scope.exRoutine.one_rep--;	
+				$scope.exRoutine.one_rep--;
 			}
-			
+
 		}else if($scope.exSet==2){
 			$scope.exRoutine.two_rep--;
 		}else if($scope.exSet==3){

@@ -30,11 +30,14 @@ function (Restangular,$cookieStore) {
       params.day=program.getDay();
       return userProgram.post('',params);
     },
-	login: function(email,passwd){
-		return Restangular.one("").customGET("login",{'email':email,'password':passwd});
+    login: function(email,passwd){
+      return Restangular.one("").customGET("login",{'email':email,'password':passwd});
     },
     logout: function(){
       return Restangular.one("").customGET("logout");
-    }
+    },
+    signUp: function(user){
+      return users.post('',user);
+    },
   }
 });
