@@ -15,6 +15,14 @@ var trueObjectToValue = function(object){
   }
 }
 
+var purposeToValue = function(object){
+  for(var key in object){
+    if(object[key] != false){
+      return object[key];
+    }
+  }
+}
+
 
 angular.module('expirit.controllers')
 .controller('questController', function($scope,$rootScope,QuestService,ionicDatePicker) {
@@ -34,9 +42,9 @@ angular.module('expirit.controllers')
   };
 
   $scope.checkboxPurpose = {
-       lose : false,
-       keep : false,
-       gain : false,
+       lose : true, //lose
+       keep : false, //keep
+       gain : false, //gain
   };
   $scope.checkboxLevel = {
       level : ""
@@ -58,10 +66,10 @@ angular.module('expirit.controllers')
 
   $scope.userWeight=50;
   $scope.up=function(){
-    $scope.weight++;
+    $scope.userWeight++;
   }
   $scope.down=function(){
-    $scope.weight--;
+    $scope.userWeight--;
   }
   //데이트 피커 관리하는 컨트롤러 부분
   $scope.birthday = new Date();
@@ -96,14 +104,21 @@ angular.module('expirit.controllers')
 
 
   $scope.end = function(){
-    alert("데이터를 보냅니다.");
-    var update={
-      age : "",
-      weight : $scope.weight,
-      purpose : trueObjectToValue($scope.checkboxPurpose),
+    //alert("데이터를 보냅니다.");
+    var updateInfo={
+      userAge : 0,
+      weight : $scope.userWeight,
+      purpose : purposeToValue($scope.checkboxPurpose),
+      userGender : trueObjectToValue($scope.checkboxGender),
+      weightPurpose : ""
     }
-    console.log(trueObjectToList($scope.checkboxDay));
-    //QuestService.apiUpdateUser();
-    location.href="#/interview";
+    //console.log(updateInfo);
+    var days=trueObjectToList($scope.checkboxDay);
+
+    QuestService.setUp(updateInfo,days);
   }
+
+  $scope.$on('setUpSuccessEvent',function(event,obj){
+    location.href="#/tab/home";
+  });
 })

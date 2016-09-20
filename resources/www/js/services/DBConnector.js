@@ -52,8 +52,32 @@ function DBConnector($cordovaSQLite,$q,$ionicPlatform){
     $cordovaSQLite.execute(db,"CREATE TABLE IF NOT EXISTS exercise (exNo varchar primary key NOT NULL, exName varchar, restSecond integer,method text,exImage varchar, exUrl varchar, exImgSysName varchar,exDefaultSet varchar,exImgPath varchar,exEtc varchar, exDesc text, exLevel integer, exDepth1 varchar,exDepth2 varchar, exDepth3 varchar)");
   };
 
+
+  // this.email="";
+  // this.name="";
+  // this.tel="";
+  // this.userGender="";
+  // this.userType="";
+  // this.height="";
+  // this.weight="";
+  // this.age="";
+  // this.level="";
+  // this.weightPurpose="";
+
   this.createUserTable = function(){
-    $cordovaSQLite.execute(db,"CREATE TABLE IF NOT EXISTS user (exNo varchar primary key NOT NULL, exName varchar, restSecond integer,method text,exImage varchar, exUrl varchar, exImgSysName varchar,exDefaultSet varchar,exImgPath varchar,exEtc varchar, exDesc text, exLevel integer, exDepth1 varchar,exDepth2 varchar, exDepth3 varchar)");
+    $cordovaSQLite.execute(db,"CREATE TABLE IF NOT EXISTS user\
+     ( email varchar primary key NOT NULL, \
+       userName varchar, \
+       tel varchar, \
+       userGender varchar, \
+       userType varchar, \
+       height integer, \
+       weight integer, \
+       purpose varchar, \
+       userAge integer, \
+       userLevel varchar, \
+       joinType varchar, \
+       weightPurpose varchar)");
   };
 
   this.createHistoryTable = function(){

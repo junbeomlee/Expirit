@@ -2,22 +2,56 @@ angular.module('expirit.services').service('UserDao',UserDao)
 
 UserDao.$inject=['$cordovaSQLite','DBConnector'];
 
+function toArray(obj)
+{
+  var res=[];
+  for(var propertyName in obj) {
+    if (typeof obj[propertyName] != 'function'){
+      res.push(obj[propertyName]);
+    }
+  }
+  return res;
+}
+/*
+this.email="";
+this.name="";
+this.tel="";
+this.userGender="";
+this.userType="";
+this.height;
+this.weight;
+this.purpose="";
+this.userAge;
+this.userLevel="";
+this.joinType="";
+this.weightPurpose="";
+
+*/
+
 function UserDao($cordovaSQLite,DBConnector){
 
-  this.add = function(exercise){
-    return DBConnector.query("INSERT INTO exercise (\
-      exNo,exName,restSecond,method,exImage,exUrl,exImgSysName,exDefaultSet,exImgPath,exEtc,\
-      exDesc,exLevel,exDepth1,exDepth2,exDepth3) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",exercise);
-  };
-
-
-  this.getAll = function(){
-    return DBConnector.query("SELECT * FROM exercise")
-    .then(function(result){
-      return DBConnector.getAll(result);
-    });
-  };
-
+  this.insert = function(user){
+      var userlist =[];
+      var arrayUser= toArray(user);
+      console.log(toArray(user));
+      return DBConnector.query("INSERT INTO user (email,userName,tel,userGender,userType,height,weight,purpose,userAge,userLevel,joinType,weightPurpose) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)",arrayUser);
+  }
+  this.update = function(user){
+    return DBConnector.query("UPDATE user \
+                              SET \
+                              userName='"+user.userName+"' ,\
+                              tel='"+user.tel+"' ,\
+                              userGender='"+user.userGender+"' ,\
+                              userType='"+user.userType+"' ,\
+                              height='"+user.height+"' ,\
+                              weight='"+user.weight+"' ,\
+                              purpose='"+user.purpose+"' ,\
+                              userAge='"+user.userAge+"' ,\
+                              userLevel='"+user.userLevel+"' ,\
+                              joinType='"+user.joinType+"' ,\
+                              weightPurpose='"+user.weightPurpose+"' \
+                              WHERE email='"+user.email+"'");
+  }
 
   //남훈 작성 부분.
   //사용자 정보 수정

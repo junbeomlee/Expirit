@@ -1,8 +1,8 @@
 angular.module('expirit.services').service('JoinService',JoinService);
 
-JoinService.$inject = ['UserApi','Exercise','$rootScope','User'];
+JoinService.$inject = ['UserApi','Exercise','$rootScope','User','UserDao'];
 
-function JoinService(UserApi,Exercise,$rootScope,User){
+function JoinService(UserApi,Exercise,$rootScope,User,UserDao){
 
  /*
   * day에 해당하는 프로그램 리스트 불러오기
@@ -41,14 +41,15 @@ function JoinService(UserApi,Exercise,$rootScope,User){
         var resData = response.data.plain()[0];
         console.log("signUp succecc data:");
         console.log(resData);
-        User.fromJson(resData);
-        console.log(User);
+        User.fromJson(resData); //->모든 정보를 User에 저장된다
+        UserDao.insert(User);
+        $rootScope.$broadcast('signUpSuccessEvent',"");
       }
     });
   }
 
-  var stringTest='{\
-    "email": "frontalnh@naver.com",\
+  /*var stringTest=' {\
+    "email": "asd",\
     "userName": "이남훈",\
     "userTel": "010-4299-2920",\
     "userGender": "10011",\
@@ -60,8 +61,13 @@ function JoinService(UserApi,Exercise,$rootScope,User){
     "withdrawYN": null,\
     "userLevel": "",\
     "joinType": "002002",\
-    "weightPurpose": ""}';
-    
+    "weightPurpose": "",\
+    "programs": [],\
+    "records": []}';
+
   User.fromJson(JSON.parse(stringTest));
+  UserDao.insert(User);
+  UserDao.update(User);
+  console.log(User);*/
   console.log(User);
 }

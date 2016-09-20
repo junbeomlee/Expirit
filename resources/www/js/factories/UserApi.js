@@ -39,5 +39,10 @@ function (Restangular,$cookieStore) {
     signUp: function(user){
       return users.post('',user);
     },
+    setUp : function(updateInfo,days){
+      updateInfo['days']=days.toString();
+      console.log(days.toString());
+      return users.customPOST("",'setUp',updateInfo);
+    }
   }
 });

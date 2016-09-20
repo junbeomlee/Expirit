@@ -2,13 +2,13 @@
   <ion-nav-title>
   <div style="overflow:hidden; position:absolute; top:50%; margin-top:-15px">
     <!-- 플롯쓰면 상위 div에서 오버플로우 히든 해야함 플로-->
-    <button class="button icon-left ion-chevron-left button-clear button-dark" style="float:left; color:white;" 
+    <button class="button icon-left ion-chevron-left button-clear button-dark" style="float:left; color:white;"
     ng-click="backpage()" ng-show="(templateValue>1)">Back</button>
     <!--버튼 헤이트 값이 30이었으므로 그 반절인 -15px을 마진 탑으로 주었다.-->
   </div>
       {{templateValue}}
   </ion-nav-title>
-  
+
   <ion-content>
 
     <!--<p>Select page content template via dropdown</p>
@@ -125,7 +125,7 @@
 
     </div>
     </section>
-	
+
   </script>
 
 
@@ -145,14 +145,14 @@
         <table cellpadding="0" cellspacing="0" border="0" style="width:60%; margin:auto;">
           <tr>
             <td valign="top">
-                <input type='checkbox' ng-click="checkboxGender.female=false" ng-model="checkboxGender.male" 
+                <input type='checkbox' ng-click="checkboxGender.female=false" ng-model="checkboxGender.male"
                 value='male' id="male" class="imgcheck_male"/>
                 <label for="male"></label>
             </td>
-            
+
             <td><font color="white">aaa</font></td>
             <td valign="top">
-                <input type='checkbox' ng-click="checkboxGender.male=false" ng-model="checkboxGender.female" 
+                <input type='checkbox' ng-click="checkboxGender.male=false" ng-model="checkboxGender.female"
                 value='female' id="female" class="imgcheck_female" />
                 <label for="female"></label>
             </td>
@@ -193,7 +193,7 @@
         </div>
 
     </section>
-	
+
   </script>
 
 
@@ -212,7 +212,7 @@
         <table cellpadding="0" cellspacing="0" border="0" style="width:60%; margin:auto; text-align:center;">
           <tr>
             <td valign="top">
-              <input type='checkbox' ng-click="checkboxPurpose.keep=false;checkboxPurpose.gain=false" 
+              <input type='checkbox' ng-click="checkboxPurpose.keep=false;checkboxPurpose.gain=false"
               ng-true-value="'009001'" id="lose" class="imgcheck_lose" ng-model="checkboxPurpose.lose"/>
               <label for="lose"></label>
             </td>

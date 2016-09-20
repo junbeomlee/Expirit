@@ -1,25 +1,56 @@
 angular.module('expirit.services').service('User',User)
 
-User.$inject=[];
-
-function User(){
+User.$inject=['ProgramManager'];
+/*
+( email varchar primary key NOT NULL, \
+	name varchar, \
+	tel varchar, \
+	userGender varchar, \
+	userType varchar, \
+	height integer, \
+	weight integer, \
+	purpose varchar, \
+	userAge integer, \
+	userLevel varchar, \
+	joinType varchar, \
+	weightPurpose varchar)");
+	*/
+function User(ProgramManager){
 
 	this.email="";
-	this.name="";
-	this.tel="";
+	this.userName="";
+	this.userTel="";
 	this.userGender="";
 	this.userType="";
-	this.height="";
-	this.weight="";
-	this.age="";
-	this.level="";
+	this.height=0;
+	this.weight=0;
+	this.purpose="";
+	this.userAge=0;
+	this.userLevel="";
+	this.joinType="";
 	this.weightPurpose="";
+	this.ProgramManager=ProgramManager;
 
 	this.fromJson = function(user){
 		for(var propertyName in user) {
 			// propertyName is what you want
 			// you can get the value like this: myObject[propertyName]
 			if(propertyName in this){
+				if(propertyName == 'programs'){
+
+					var programList = [];
+	        var resData = user[programs];
+	        angular.forEach(resData, function(program, index){
+	          var exerciseJson = program.exercise;
+	          var exercise = Exercise.fromJson(exerciseJson);
+	          var program = new Program(exercise,program.day);
+	          programList.push(program);
+	          //ProgramManager.add(program);
+	          //console.log(ProgramManager);
+	        });
+	        this.ProgramManager.set(programList);
+					break;
+				}
 				this[propertyName]=user[propertyName];
 			}
 		}

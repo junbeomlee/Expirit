@@ -51,6 +51,7 @@ angular.module('Expirit',
     };*/
     DBConnector.connectDatabase(ionic.Platform.isAndroid());
     DBConnector.createExerciseTable();
+    DBConnector.createUserTable();
     if (Application.isInitialRun()) {
       Application.setInitialRun(false);
       console.log("only once!!!");

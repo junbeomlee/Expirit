@@ -15,4 +15,8 @@ angular.module('expirit.controllers')
     console.log($scope.user);
     JoinService.signUp($scope.user);
   }
+
+  $scope.$on('signUpSuccessEvent',function(event,obj){
+    location.href="#/quest";
+  });
 })
