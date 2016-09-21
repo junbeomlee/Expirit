@@ -29,32 +29,31 @@ function User(ProgramManager){
 	this.userLevel="";
 	this.joinType="";
 	this.weightPurpose="";
-	this.ProgramManager=ProgramManager;
 
 	this.fromJson = function(user){
 		for(var propertyName in user) {
 			// propertyName is what you want
 			// you can get the value like this: myObject[propertyName]
 			if(propertyName in this){
-				if(propertyName == 'programs'){
-
-					var programList = [];
-	        var resData = user[programs];
-	        angular.forEach(resData, function(program, index){
-	          var exerciseJson = program.exercise;
-	          var exercise = Exercise.fromJson(exerciseJson);
-	          var program = new Program(exercise,program.day);
-	          programList.push(program);
-	          //ProgramManager.add(program);
-	          //console.log(ProgramManager);
-	        });
-	        this.ProgramManager.set(programList);
-					break;
-				}
 				this[propertyName]=user[propertyName];
 			}
 		}
 	};
+
+	this.fromArrayJson = function(userArray){
+		this.email=userArray[0];
+		this.userName=userArray[1];
+		this.userTel=userArray[2];
+		this.userGender=userArray[3];
+		this.userType=userArray[4];
+		this.height=userArray[5];
+		this.weight=userArray[6];
+		this.purpose=userArray[7];
+		this.userAge=userArray[8];
+		this.userLevel=userArray[9];
+		this.joinType=userArray[10];
+		this.weightPurpose=userArray[11];
+	}
 	// this.getOne = function(id){
 	//   return DBConnector.query();
 	// }

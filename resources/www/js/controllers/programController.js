@@ -90,6 +90,7 @@ angular.module('expirit.controllers')
   * 해당 데이터가 변경되었음을 의미
   */
   $rootScope.$on('changeProgramManagerEvent',function(event,programManager){
+    console.log(programManager.programList[0]);
     //console.log("load!!");
     if(clickedDay==undefined){
       var programListByDay=programManager.getListByDay(getTodayLabel());

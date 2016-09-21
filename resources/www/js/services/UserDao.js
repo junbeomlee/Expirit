@@ -12,21 +12,6 @@ function toArray(obj)
   }
   return res;
 }
-/*
-this.email="";
-this.name="";
-this.tel="";
-this.userGender="";
-this.userType="";
-this.height;
-this.weight;
-this.purpose="";
-this.userAge;
-this.userLevel="";
-this.joinType="";
-this.weightPurpose="";
-
-*/
 
 function UserDao($cordovaSQLite,DBConnector){
 
@@ -36,6 +21,7 @@ function UserDao($cordovaSQLite,DBConnector){
       console.log(toArray(user));
       return DBConnector.query("INSERT INTO user (email,userName,tel,userGender,userType,height,weight,purpose,userAge,userLevel,joinType,weightPurpose) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)",arrayUser);
   }
+
   this.update = function(user){
     return DBConnector.query("UPDATE user \
                               SET \
@@ -53,6 +39,17 @@ function UserDao($cordovaSQLite,DBConnector){
                               WHERE email='"+user.email+"'");
   }
 
+  this.count = function(){
+    return DBConnector.query("SELECT COUNT(*) FROM user").then(function(result){
+      return DBConnector.getById(result);
+    });
+  };
+
+  this.getOne = function(){
+    return DBConnector.query("SELECT * FROM user").then(function(result){
+        return DBConnector.getAll(result);
+    });
+  }
   //남훈 작성 부분.
   //사용자 정보 수정
   //this.update

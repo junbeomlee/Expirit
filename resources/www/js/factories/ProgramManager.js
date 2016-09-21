@@ -1,6 +1,6 @@
 angular.module('expirit.factories').factory('ProgramManager',ProgramManager)
-ProgramManager.$inject = [];
-function ProgramManager(){
+ProgramManager.$inject = ['Program'];
+function ProgramManager(program){
   var programManager = {
     programList:[],
     getListByExerciseNo: function(exNo){
@@ -10,7 +10,7 @@ function ProgramManager(){
     },
     getListByDay: function(day){
       return this.programList.filter(function(program){
-        return program.getDay()==day;
+        return program.day==day;
       });
     },
     add: function(program){

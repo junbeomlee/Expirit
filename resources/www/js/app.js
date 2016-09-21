@@ -23,10 +23,10 @@ angular.module('Expirit',
 'jh.angular-number-picker',
 'chart.js',
 'ionic-datepicker','angular-svg-round-progressbar'
- //데이트피커 주입시켜 줌.
+//데이트피커 주입시켜 줌.
 
 ])
-.run(function($rootScope,$ionicPlatform,Application,$cookies,$cordovaSQLite,DBConnector) {
+.run(function($rootScope,$ionicPlatform,Application,$cookies,$cordovaSQLite,DBConnector,LoginHandler,User) {
   $rootScope.$cookies = $cookies;
 
   $ionicPlatform.ready(function() {
@@ -41,17 +41,30 @@ angular.module('Expirit',
       StatusBar.styleDefault();
     }
 
-    /*if(ionic.Platform.isAndroid()){
-      //android db connection
-      $cordovaSQLite.openDB({ name: 'expirit.db' });
-    }else{
-      // web db connection
-      //console.log(DBConnector+"WEB");
-      db = window.openDatabase("expirit.db", "1.0", "My app", -1);
-    };*/
+
+
+
+
     DBConnector.connectDatabase(ionic.Platform.isAndroid());
     DBConnector.createExerciseTable();
     DBConnector.createUserTable();
+    LoginHandler.checkLogin();
+    /*$rootScope.$on('$locationChangeStart', function (event, next, current) {
+      console.log("path changed");
+      console.log(location.hash);
+      if(location.hash=="#/join" || location.hash == "#/intro"){
+        console.log("check?");
+      }else{
+        console.log(User);
+        if(User.email){
+          console.log("User 잇다");
+        }else{
+          console.log("User 없다");
+          //alert("로그인 하세요!!");
+          event.preventDefault();
+        }
+      }
+    });*/
     if (Application.isInitialRun()) {
       Application.setInitialRun(false);
       console.log("only once!!!");
@@ -69,7 +82,7 @@ angular.module('Expirit',
 .constant('CONFIG',{'APP_NAME': 'Expirit','APP_PROGRAM' : '내 운동 프로그램',})
 .config(function($cookiesProvider,$stateProvider, $urlRouterProvider,RestangularProvider,$httpProvider,ErrorInterceptorProvider,$ionicConfigProvider) {
 
-$ionicConfigProvider.tabs.position('bottom');
+  $ionicConfigProvider.tabs.position('bottom');
 
   // Ionic uses AngularUI Router which uses the concept of states
   // Learn more here: https://github.com/angular-ui/ui-router
@@ -123,28 +136,28 @@ $ionicConfigProvider.tabs.position('bottom');
   })
   .state('main', {
     url: '/main',
-        templateUrl: 'templates/main/main.html',
-        controller: 'mainController'
+    templateUrl: 'templates/main/main.html',
+    controller: 'mainController'
 
   })
-    .state('intro', {
+  .state('intro', {
     url: '/intro',
-        templateUrl: 'templates/intro/intro.html',
-        controller: 'introController'
+    templateUrl: 'templates/intro/intro.html',
+    controller: 'introController'
 
   })
 
   .state('interview', {
     url: '/interview',
-        templateUrl: 'templates/interview/interview.html',
-        controller: 'interviewController'
+    templateUrl: 'templates/interview/interview.html',
+    controller: 'interviewController'
 
   })
 
   .state('join', {
     url: '/join',
-        templateUrl: 'templates/intro/join.html',
-        controller: 'joinController'
+    templateUrl: 'templates/intro/join.html',
+    controller: 'joinController'
 
   })
   .state('tab.etc', {
@@ -167,38 +180,112 @@ $ionicConfigProvider.tabs.position('bottom');
     url: '/addExercise/:day',
     templateUrl : "templates/addExercise.html",
     controller : 'addExerciseController'
-    /*views:{
-      'addExercise' : {
-        templateUrl:"templates/addExercise.html",
-        controller: 'addExerciseController'
-      }
-    }*/
-  });
-
-
-  // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/tab/home');
-
-  //restangular config==
-  /*
-  * dev 세팅
-  */
-  if(ionic.Platform.isAndroid()){
-    RestangularProvider.setBaseUrl('http://10.0.2.2:8080');
-  }else{
-    RestangularProvider.setBaseUrl('http://localhost:8080');
-  }
-
-  RestangularProvider.setFullResponse(true);
-  $httpProvider.defaults.withCredentials = true;
-  RestangularProvider.setErrorInterceptor(ErrorInterceptorProvider.$get().response);
-  RestangularProvider.setRequestInterceptor(function(elem, operation) {
-    if (operation === "remove") {
-      return undefined;
-    }/*else if(operation==="post"){
-      return undefined;
-    }*/
-    console.log(elem);
-    return elem;
-  });
 });
+
+
+// if none of the above states are matched, use this as the fallback
+$urlRouterProvider.otherwise('/tab/home');
+
+//restangular config==
+/*
+* dev 세팅
+*/
+if(ionic.Platform.isAndroid()){
+  RestangularProvider.setBaseUrl('http://10.0.2.2:8080');
+}else{
+  RestangularProvider.setBaseUrl('http://localhost:8080');
+}
+
+RestangularProvider.setFullResponse(true);
+$httpProvider.defaults.withCredentials = true;
+RestangularProvider.setErrorInterceptor(ErrorInterceptorProvider.$get().response);
+RestangularProvider.setRequestInterceptor(function(elem, operation) {
+  if (operation === "remove") {
+    return undefined;
+  }else if(operation==="post"){
+    return undefined;
+  }
+  console.log(elem);
+  return elem;
+});
+});
+
+
+window.routes={
+  'tab': {
+    url: '/tab',
+    abstract: true,
+    templateUrl: 'templates/tabs.html'
+  },
+  'tab.home':  {
+    url: '/home',
+    views: {
+      'tab-home': {
+        templateUrl: 'templates/tab-home.html',
+        controller: 'homeController'
+      }
+    }
+  },
+  'tab.history' : {
+    url: '/history',
+    views: {
+      'tab-history': {
+        templateUrl: 'templates/tab-history.html',
+        controller: 'historyController'
+      }
+    }
+  },
+  'tab.profile' : {
+    url: '/profile',
+    views: {
+      'tab-profile': {
+        templateUrl: 'templates/tab-profile.html',
+        controller: 'profileController'
+      }
+    }
+  },
+  'tab.program' : {
+    url: '/program',
+    views: {
+      'tab-program': {
+        templateUrl: 'templates/tab-program.html',
+        controller: 'programController'
+      }
+    }
+  },
+  'main' : {
+    url: '/main',
+    templateUrl: 'templates/main/main.html',
+    controller: 'mainController'
+  },
+  'interview' : {
+    url: '/interview',
+    templateUrl: 'templates/interview/interview.html',
+    controller: 'interviewController'
+
+  },
+  'join' : {
+    url: '/join',
+    templateUrl: 'templates/intro/join.html',
+    controller: 'joinController'
+  },
+  'tab.etc' : {
+    url: '/etc',
+    views: {
+      'tab-etc': {
+        templateUrl: 'templates/tab-etc.html',
+        controller: 'etcController'
+      }
+    }
+  },
+  'quest': {
+    url: '/quest',
+    templateUrl:"templates/quest/quest.html",
+    controller: 'questController'
+  },
+  'addExercise': {
+    url: '/addExercise/:day',
+    templateUrl : "templates/addExercise.html",
+    controller : 'addExerciseController'
+  }
+};
