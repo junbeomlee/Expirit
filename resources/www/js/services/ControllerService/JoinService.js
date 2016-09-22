@@ -38,8 +38,9 @@ function JoinService(UserApi,Exercise,$rootScope,User,UserDao,ProgramManager,Pro
         var exerciseList=[];
         var resData = response.data.plain()[0];
         User.fromJson(resData); //->모든 정보를 User에 저장된다
-        UserDao.insert(User);
+        //UserDao.insert(User);
         $rootScope.$broadcast('signUpSuccessEvent',"");
+        $rootScope.$broadcast('changeUserEvent',User);
       }
     });
   }

@@ -1,53 +1,36 @@
 angular.module('expirit.controllers')
 
-.controller('homeController', function($scope,CONFIG,$http,FacebookLogin,DropDownList,ProgramService,UserApi,HomeService,User,ProgramManager) {
+.controller('homeController', function($scope,CONFIG,$rootScope,FacebookLogin,DropDownList,HomeService,HistoryApi) {
   $scope.appName=CONFIG.APP_NAME;
-  $scope.userName="최현호";
+  $scope.userName=User.userName;
 
   var dropDownList = new DropDownList();
 
-  var d= new Date();
-  var week = new Array('SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT');
-  //var today=week[d.getDay()];
-  var today='WED';
-  console.log(today);
-  console.log(ProgramManager);
-  console.log(User);
-  //console.log(programManager);
-  // var clickedExercise="";
-  // var programList=ProgramService.getProgramListByDay(today);
-  // $scope.programs=dropDownList.fromProgramList(programList);
-  //
-  // $scope.apiGetProgram = function(){
-	// UserApi.login().then(function(res){
-  //     console.log(res.data[0].email);
-  //   });
-  //   ProgramService.apiGetProgramList();
-	// programList=ProgramService.getProgramListByDay(today);
-  // $scope.programs=dropDownList.fromProgramList(programList);
-  // }
-
-
-
- $scope.facebookLogin=function(){
-    console.log("clicked");
-    FacebookLogin.login();
+  function getTodayLabel(){
+    var week = new Array('SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT');
+    var today = new Date().getDay();
+    var todayLabel = week[today];
+    return todayLabel;
   }
-  $scope.$on('$ionTreeList:ItemClicked', function(event, exercise) {
-    if(exercise.depth==2){
-		//기존꺼 false
-      clickedExercise.clicked="false";
-      //할당
-      clickedExercise=exercise;
-      //true
-      clickedExercise.clicked="true";
-		HomeService.setExName(exercise.exName);
-		window.location.href="http://localhost:8100/#/main";
-    }
-    else{
-      clickedExercise="";
-    }
 
+  $rootScope.$on('changeUserEvent',function(event,User){
+    $scope.userName=User.userName;
+  });
+
+  $rootScope.$on('changeProgramManagerEvent',function(event,programManager){
+    var programListByDay=programManager.getListByDay(getTodayLabel());
+    $scope.programs=dropDownList.fromProgramList(programListByDay);
+  });
+
+  /*
+    test code
+  */
+  /*var history={
+    exNo: 78,
+    set : 12,
+    exWeight : 123456123456123
   }
-);
+  HistoryApi.add(history).then(function(result){
+    console.log(result);
+  });*/
 })

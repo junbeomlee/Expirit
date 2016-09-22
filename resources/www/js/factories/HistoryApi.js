@@ -12,6 +12,9 @@ function (Restangular) {
       },
       getAll : function(){
         return histories.getList();
+      },
+      add : function(history){
+        return histories.post('',history);
       }
     }
 });

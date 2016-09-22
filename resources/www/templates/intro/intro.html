@@ -113,12 +113,12 @@
                 <form action="http://validator.w3.org/check" method="get">
                   <label class="item item-input" >
                     <i class="icon ion-person placeholder-icon"></i>
-                    <input type="text" id="email" placeholder="아이디">
+                    <input type="text" id="email" placeholder="아이디" ng-model="user.id">
                   </label>
 
                   <label class="item item-input">
                     <i class="icon ion-locked placeholder-icon"></i>
-                    <input type="text" id="passwd" placeholder="비밀번호">
+                    <input type="text" id="passwd" placeholder="비밀번호" ng-model="user.password">
 
                   </label>
                 </form>

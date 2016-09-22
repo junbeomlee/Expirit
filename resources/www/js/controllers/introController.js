@@ -1,137 +1,32 @@
-var trueObjectToList = function(object){
-  var output=[];
-  for(var key in object){
-    if(object[key]==true)
-      output.push(key);
-  }
-  return output;
-}
-
-var trueObjectToValue = function(object){
-  for(var key in object){
-    if(object[key]==true){
-      return key;
-    }
-  }
-}
-
-
 angular.module('expirit.controllers')
-.controller('introController', function($scope,$rootScope) {
+.controller('introController', function($scope,$rootScope,IntroService) {
 
   $scope.backpage=function(){
-    $scope.templateValue--; 
+    $scope.templateValue--;
   }
 
   $scope.title=""
   $scope.templateValue=1;
   $scope.templatePrefix='page';
 	//가입할때 쓰는 컨트롤러 - 미완성본 코딩 안함.
-  
-  $scope.gender="none";
-  $scope.checkboxGender = {
-       male : true,
-       female : false
-  };
 
-  $scope.checkboxPurpose = {
-       lose : false,
-       keep : false,
-       gain : false,
-  };
-  $scope.checkboxLevel = {
-      level : ""
-  };
-  $scope.checkboxPrefer = {
-       free : false,
-       machine : false
-  };
-  $scope.checkboxDay = {
-       MON : false,
-       TUE : false,
-       WED : false,
-       THR : false,
-       FRI : false,
-       SAT : false,
-       SUN : false,
-  };
-  
-  $scope.weight=50;
-
-  $scope.end = function(){
-    alert("데이터를 보냅니다.");
-    var update={
-      age : "",
-      weight : $scope.weight,
-      purpose : trueObjectToValue($scope.checkboxPurpose),
-    }
-    console.log(trueObjectToList($scope.checkboxDay));
-    QuestService.apiUpdateUser();
-    location.href="#/tab/home";
+  $scope.user={
+    id:"",
+    password:""
   }
 
   $scope.login=function(){
-    location.href='#/quest';
-  }
-})
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-angular.module('expirit.controllers')
-
-.service('QuestService',function($rootScope){
-  this.setBirth = function(birth){
-	$rootScope.birth=birth;
-	console.log($rootScope.birth);
-  };
-
-  this.setSex = function(sex){
-	$rootScope.sex=sex;
-	console.log($rootScope.sex);
-  };
-  this.getSex=function(){
-	  return $rootScope.sex;
+    //console.log("login");
+    //location.href='#/quest';
+    // console.log($scope.user.id);
+    // console.log($scope.user.password);
+    // console.log(IntroService);
+    IntroService.login($scope.user.id,$scope.user.password);
   }
 
-  this.setWeight= function(weight){
-	$rootScope.weight=weight;
-	console.log($rootScope.weight);
-  };
-  this.setPurpose= function(purpose){
-	$rootScope.purpose=purpose;
-	console.log($rootScope.purpose);
-  };
-	this.setPrefer= function(prefer){
-		$rootScope.prefer=prefer;
-		console.log($rootScope.prefer);
-	};
+  $scope.$on('loginSuccessEvent',function(event,obj){
+    location.href="#/tab/home";
+  });
 })
 
 
@@ -160,26 +55,3 @@ $scope.$on("$ionicSlides.slideChangeEnd", function(event, data){
 
 
 /*질의사항에서 숫자 픽커를 관리하는 컨트롤러*/
-
-
-
-.controller('loginController', function ($scope,UserApi) {
-	$scope.email='';
-	$scope.passwd='';
-	$scope.login = function(){
-		$scope.email= document.getElementById('email').value;
-		$scope.passwd= document.getElementById('passwd').value;
-		UserApi.login($scope.email,$scope.passwd).then(function(res){
-			console.log(res.data[0].email);
-			location.href="#/quest1";
-		})
-	}
-})
-.controller('joinController', function ($scope,UserApi) {
-	$scope.name='';
-	$scope.email='';
-	$scope.passwd='';
-	$scope.passwd2='';
-
-})
-

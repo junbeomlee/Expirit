@@ -26,7 +26,7 @@ angular.module('Expirit',
 //데이트피커 주입시켜 줌.
 
 ])
-.run(function($rootScope,$ionicPlatform,Application,$cookies,$cordovaSQLite,DBConnector,LoginHandler,User) {
+.run(function($rootScope,$ionicPlatform,Application,$cookies,$cordovaSQLite,DBConnector,SessionService) {
   $rootScope.$cookies = $cookies;
 
   $ionicPlatform.ready(function() {
@@ -48,23 +48,19 @@ angular.module('Expirit',
     DBConnector.connectDatabase(ionic.Platform.isAndroid());
     DBConnector.createExerciseTable();
     DBConnector.createUserTable();
-    LoginHandler.checkLogin();
-    /*$rootScope.$on('$locationChangeStart', function (event, next, current) {
-      console.log("path changed");
-      console.log(location.hash);
-      if(location.hash=="#/join" || location.hash == "#/intro"){
-        console.log("check?");
-      }else{
-        console.log(User);
-        if(User.email){
-          console.log("User 잇다");
-        }else{
-          console.log("User 없다");
-          //alert("로그인 하세요!!");
-          event.preventDefault();
+    //LoginHandler.checkLogin();
+    $rootScope.$on('$locationChangeStart', function (event, next, current) {
+      for(var i in window.routes) {
+            if(next.indexOf(i) != -1) {
+                if(window.routes[i].requireLogin!=false && !SessionService.getUserAuthenticated()) {
+                    alert("You need to be authenticated to see this page!");
+                    event.preventDefault();
+                    location.href="#/intro";
+                    break;
+                }
+            }
         }
-      }
-    });*/
+    });
     if (Application.isInitialRun()) {
       Application.setInitialRun(false);
       console.log("only once!!!");
@@ -88,99 +84,102 @@ angular.module('Expirit',
   // Learn more here: https://github.com/angular-ui/ui-router
   // Set up the various states which the app can be in.
   // Each state's controller can be found in controllers.js
-  $stateProvider
+  for(var path in window.routes){
+    $stateProvider.state(path,window.routes[path]);
+  }
+  /*$stateProvider
   // setup an abstract state for the tabs directive
   .state('tab', {
-    url: '/tab',
-    abstract: true,
-    templateUrl: 'templates/tabs.html'
-  })
+  url: '/tab',
+  abstract: true,
+  templateUrl: 'templates/tabs.html'
+})
 
-  // Each tab has its own nav history stack:
+// Each tab has its own nav history stack:
 
-  .state('tab.home', {
-    url: '/home',
-    views: {
-      'tab-home': {
-        templateUrl: 'templates/tab-home.html',
-        controller: 'homeController'
-      }
-    }
-  })
-  .state('tab.history', {
-    url: '/history',
-    views: {
-      'tab-history': {
-        templateUrl: 'templates/tab-history.html',
-        controller: 'historyController'
-      }
-    }
-  })
-  .state('tab.profile', {
-    url: '/profile',
-    views: {
-      'tab-profile': {
-        templateUrl: 'templates/tab-profile.html',
-        controller: 'profileController'
-      }
-    }
-  })
-  .state('tab.program', {
-    url: '/program',
-    views: {
-      'tab-program': {
-        templateUrl: 'templates/tab-program.html',
-        controller: 'programController'
-      }
-    }
-  })
-  .state('main', {
-    url: '/main',
-    templateUrl: 'templates/main/main.html',
-    controller: 'mainController'
+.state('tab.home', {
+url: '/home',
+views: {
+'tab-home': {
+templateUrl: 'templates/tab-home.html',
+controller: 'homeController'
+}
+}
+})
+.state('tab.history', {
+url: '/history',
+views: {
+'tab-history': {
+templateUrl: 'templates/tab-history.html',
+controller: 'historyController'
+}
+}
+})
+.state('tab.profile', {
+url: '/profile',
+views: {
+'tab-profile': {
+templateUrl: 'templates/tab-profile.html',
+controller: 'profileController'
+}
+}
+})
+.state('tab.program', {
+url: '/program',
+views: {
+'tab-program': {
+templateUrl: 'templates/tab-program.html',
+controller: 'programController'
+}
+}
+})
+.state('main', {
+url: '/main',
+templateUrl: 'templates/main/main.html',
+controller: 'mainController'
 
-  })
-  .state('intro', {
-    url: '/intro',
-    templateUrl: 'templates/intro/intro.html',
-    controller: 'introController'
+})
+.state('intro', {
+url: '/intro',
+templateUrl: 'templates/intro/intro.html',
+controller: 'introController'
 
-  })
+})
 
-  .state('interview', {
-    url: '/interview',
-    templateUrl: 'templates/interview/interview.html',
-    controller: 'interviewController'
+.state('interview', {
+url: '/interview',
+templateUrl: 'templates/interview/interview.html',
+controller: 'interviewController'
 
-  })
+})
 
-  .state('join', {
-    url: '/join',
-    templateUrl: 'templates/intro/join.html',
-    controller: 'joinController'
+.state('join', {
+url: '/join',
+templateUrl: 'templates/intro/join.html',
+controller: 'joinController'
 
-  })
-  .state('tab.etc', {
-    url: '/etc',
-    views: {
-      'tab-etc': {
-        templateUrl: 'templates/tab-etc.html',
-        controller: 'etcController'
-      }
-    }
-  })
+})
+.state('tab.etc', {
+url: '/etc',
+views: {
+'tab-etc': {
+templateUrl: 'templates/tab-etc.html',
+controller: 'etcController'
+}
+}
+})
 
-  .state('quest',{
-    url: '/quest',
-    templateUrl:"templates/quest/quest.html",
-    controller: 'questController'
-  })
+.state('quest',{
+url: '/quest',
+templateUrl:"templates/quest/quest.html",
+controller: 'questController'
+})
 
-  .state('addExercise',{
-    url: '/addExercise/:day',
-    templateUrl : "templates/addExercise.html",
-    controller : 'addExerciseController'
-});
+.state('addExercise',{
+url: '/addExercise/:day',
+templateUrl : "templates/addExercise.html",
+controller : 'addExerciseController'
+});*/
 
 
 // if none of the above states are matched, use this as the fallback
@@ -235,6 +234,13 @@ window.routes={
       }
     }
   },
+  'intro' :
+  {
+    url: '/intro',
+    templateUrl: 'templates/intro/intro.html',
+    controller: 'introController',
+    requireLogin: false
+  },
   'tab.profile' : {
     url: '/profile',
     views: {
@@ -267,7 +273,8 @@ window.routes={
   'join' : {
     url: '/join',
     templateUrl: 'templates/intro/join.html',
-    controller: 'joinController'
+    controller: 'joinController',
+    requireLogin: false
   },
   'tab.etc' : {
     url: '/etc',
